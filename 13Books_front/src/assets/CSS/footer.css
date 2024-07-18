@@ -1,0 +1,33 @@
+footer {
+    background-color: var(--verde);
+    color: var(--gris-oscuro);
+    display: flex;
+    justify-content: space-around;
+    height: 200px;
+}
+
+footer div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+    width: 400px;
+    font-size: 1em;
+}
+
+footer div:last-child {
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+footer div:first-child p:first-child {
+    text-decoration-color: var(--mostaza);
+    text-decoration-line: underline;
+    text-decoration-thickness: 4px;
+
+}
+
+footer p {
+    font-weight: 500;
+}

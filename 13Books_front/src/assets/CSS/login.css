@@ -1,0 +1,118 @@
+.loginHeader {
+    margin: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loginHeader i {
+    font-size: 2em;
+    color: var(--morado);
+}
+
+.logNav {
+    display: flex;
+    column-gap: 10px;
+    margin-left: 50px;
+    margin-bottom: 60px;
+}
+
+.logNav div {
+    background-color: var(--verde);
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logNav div:first-child {
+    width: 35px;
+    font-size: 1.2em;
+    color: var(--green-white)
+}
+
+.logNav div:first-child i {
+    color: var(--green-white);
+}
+.logNav div:last-child {
+    font-style: italic;
+    width: 120px;
+}
+main {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6%;
+}
+
+.logMain {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 30px;
+}
+
+.logName,
+.logPass {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    border: 1px solid red;
+}
+
+.logName label,
+.logPass label {
+    width: 200px;
+    padding: 8px 30px 8px 30px;
+    border: 4px solid var(--morado);
+    background-color: var(--morado);
+    color: var(--green-white);
+}
+
+.logPass label {
+    padding: 8px 0px 7px 30px;
+}
+
+.logName input,
+.logPass input {
+    font-family: 'Roboto Serif', serif;
+    height: 35px;
+    width: 100%;
+    border: 4px solid var(--morado);
+    padding-left: 10px;
+}
+
+.logButt {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    row-gap: 15px;
+}
+
+.logButt button {
+    height: 37px;
+    width: 200px;
+    font-family: 'Roboto Serif', serif;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.logButt button {
+    background-color: var(--coral);
+    border: none;
+    font-style: italic;
+    
+}
+
+.logButt .reactLink {
+  color: var(--green-white);
+}
+
+/* footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+
+} */
