@@ -1,5 +1,6 @@
 import logo from '../assets/imgs/13Books-logo.png';
-import Footer from './Footer'
+import Footer from './Footer';
+import Nav from './Nav'
 import { Link } from 'react-router-dom';
 import  '../assets/CSS/home.css';
 
@@ -13,27 +14,11 @@ function Home({books}) {
             <header className='homeHeader'>
                 <img src={logo}/>
                 <div className='log'>
-                    <button> <Link className='reactLink' to={('/login')}>LogIn</Link></button>
-                    <button><Link className='reactLink'to={('/register')}>Registro</Link></button>
+                    <button className='logHome'> <Link className='reactLink' to={('/login')}>LogIn</Link></button>
+                    <button className='logHome'><Link className='reactLink'to={('/register')}>Registro</Link></button>
                 </div>
             </header>
-            <nav className='etiquetas'>
-                <ul>
-                    <li>no-ficción</li>
-                    <li>fantasía</li>
-                    <li>histórica</li>
-                    <li>romántica</li>
-                    <li>terror</li>
-                    <li>novela negra</li>
-                    <li>poesía</li>
-                    <li>cómic</li>
-                    <li>ciencia ficción</li>
-                </ul>
-                <div className='search'>
-                <input className='searchInput' placeholder=' Buscar por título, autor, género o isbn'/>
-                <button><i class="fa-solid fa-magnifying-glass" />Buscar</button>
-                </div>
-            </nav>
+            <Nav/>
             <main className='homeMain'>
                 <h1>Destacados</h1>
                 <h3>Descubre el top ventas del mes</h3>

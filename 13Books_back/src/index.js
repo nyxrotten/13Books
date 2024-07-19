@@ -31,6 +31,13 @@ app.get('/books', async (req, res) => {
   
 });
 
+// app.post('/books', async (req, res) => {
+//   try {
+//     const insert = query('INSERT INTO BOOKS (title) VALUES ("Harry Potter")')
+//   } catch (err) {
+//     res.status(500).send('Error del servicor')
+//   }
+// })
 
 app.get('/', (req, res) => {
   res.send('Hello world!');

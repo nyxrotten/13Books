@@ -1,0 +1,61 @@
+
+.adminNav {
+    display: flex;
+}
+.logAdmin  {
+    width: 150px;
+    height: 50px;
+    font-family: 'Roboto Serif';
+    font-weight: 800;
+    margin-right: 10px;
+    font-style: italic;
+    background-color: var(--green-white);
+    border: 7px solid var(--mostaza);
+}
+
+.logAdmin:hover {
+    background-color: var(--mostaza);
+    font-style: normal;
+}
+
+.logLock {
+    border: none;
+    background-color: var(--green-white);
+    width: 50px;
+    font-size: 2em;
+}
+
+.logLock .reactLink {
+    color: var(--morado)
+}
+
+.logLock .reactLink:hover {
+    color: var(--mostaza);
+}
+
+.adminMain {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+
+.bookCardAdmin {
+    display: flex;
+    border: 4px solid var(--verde);
+    width: 60%;
+    height: 80px;
+    padding: 20px
+}
+
+.cardInfoEdit {
+    align-self: flex-end;
+    background-color: var(--green-white);
+    border: none;
+    font-size: 1.2em;
+}
+
+.cardInfoEdit .reactLink {
+    color: var(--verde);
+}

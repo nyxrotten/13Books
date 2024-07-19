@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home'
 import LogIn from './components/LogIn';
 import Register from './components/Register'
+import Admin from './components/Admin'
+import SingleProduct from './components/SingleProduct';
 
 
 
@@ -28,7 +30,10 @@ function App() {
         <Route path="/" element={<Home books={books}/>}/>
         <Route path="/login" element={<LogIn />}/>
         <Route path="/register" element={<Register />}/>
-      </Routes>
+        <Route path="/admin" element={<Admin books={books}/>}/>
+        //Esta ruta está así para poder visualizarla al para maquetar:
+        <Route path="/singleproduct" element={<SingleProduct/>}/>
+        </Routes>
     </Router>
     </>
 

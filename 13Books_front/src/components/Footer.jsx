@@ -1,4 +1,5 @@
 import '../assets/CSS/footer.css'
+
 function Footer() {
 
     return(
@@ -14,11 +15,11 @@ function Footer() {
                     <p>Contacta con nosotros</p>
                 </div>
                 <div>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-x-twitter"></i>
-                    <i class="fa-brands fa-tiktok"></i>
+                    {/* <FontAwesomeIcon icon="fa-brands fa-instagram" />
+                    <FontAwesomeIcon icon="fa-brands fa-x-twitter" />
+                    <FontAwesomeIcon icon="fa-brands fa-tiktok" /> */}
                 </div>
-            </footer>
+            </footer> 
         </>
     )
 }
