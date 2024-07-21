@@ -9,7 +9,6 @@ import Admin from './components/Admin'
 import SingleProduct from './components/SingleProduct';
 
 
-
 function App() {
   const [books, setBooks] = useState([]);
 
@@ -36,16 +35,6 @@ function App() {
         </Routes>
     </Router>
     </>
-
-
-    // <div className="App">
-    //   <h1>Lista de Libros</h1>
-    //   <ul>
-    //     {books.map(book => (
-    //       <li key={book.id}>{book.name}</li>
-    //     ))}
-    //   </ul>
-    // </div>
   );
 }
 

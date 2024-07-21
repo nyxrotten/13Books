@@ -23,11 +23,11 @@ function Home({books}) {
                 <h1>Destacados</h1>
                 <h3>Descubre el top ventas del mes</h3>
                 <div className='destacadosHome'>
-                    {books.map(book => (
-                        <div key={book.id} className='bookCard'>
+                    {books.map((book) => (
+                        <div key={book.bookid} className='bookCard'>
                             <img/>
                             <div className='bookInfo'>
-                                <h4>{book.name}</h4>
+                                <h4>{book.title}</h4>
                                 <h4>{book.author}</h4>
                             </div>
                         </div>

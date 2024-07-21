@@ -1,21 +1,77 @@
-function Nav() {
+import React, { useState } from 'react';
+
+function Nav () {
+    const [genre, setGenre] = useState('');
+    const [searchText, setSearchText] = useState('');
+    const [books, setBooks] = useState([]);
+    const [error, setError] = useState('');
+  
+    const handleSearch = async (urlApi) => {
+        console.log(urlApi);
+        try {
+          const response = await fetch(urlApi);
+          if (!response.ok) {
+            throw new Error('No disponemos de libros para ese género.');
+          }
+          const data = await response.json();
+          setBooks(data);
+          setError('');
+        } catch (err) {
+          setError(err.message);
+          setBooks([]);
+        }
+      };
+
+
+    const handleSearchButton = () => {
+        //const queryParams = new URLSearchParams();
+       // queryParams.append('searchtext', searchText);
+        //const apiUrl = `http://localhost:8080/books/search?${queryParams.toString()}`;
+        setSearchText(searchText.toLowerCase());
+        const apiUrl = `http://localhost:8080/books/search/${searchText}`;
+        handleSearch(apiUrl);
+      };
+
+
+    const handleSearchGenre = (genre) => {
+        setGenre(genre.toLowerCase());
+        const apiUrl = `http://localhost:8080/books/genre/${genre}`;
+        handleSearch(apiUrl);
+      };
+
+    
     return (
         <>
         <nav className='etiquetas'>
                 <ul>
-                    <li>no-ficción</li>
-                    <li>fantasía</li>
-                    <li>histórica</li>
-                    <li>romántica</li>
-                    <li>terror</li>
-                    <li>novela negra</li>
-                    <li>poesía</li>
-                    <li>cómic</li>
-                    <li>ciencia ficción</li>
+                    <li onClick={() => handleSearchGenre('No-Ficción')}>No-Ficción</li>
+                    <li onClick={() => handleSearchGenre('Fantasía')}>Fantasía</li>
+                    <li onClick={() => handleSearchGenre('Histórica')}>Histórica</li>
+                    <li onClick={() => handleSearchGenre('Romántica')}>Romántica</li>
+                    <li onClick={() => handleSearchGenre('Terror')}>Terror</li>
+                    <li onClick={() => handleSearchGenre('Novela Negra')}>Novela Negra</li>
+                    <li onClick={() => handleSearchGenre('Poesía')}>Poesía</li>
+                    <li onClick={() => handleSearchGenre('Cómic')}>Cómic</li>
+                    <li onClick={() => handleSearchGenre('Ciencia Ficción')}>Ciencia Ficción</li>
                 </ul>
                 <div className='search'>
-                <input className='searchInput' placeholder=' Buscar por título, autor, género o isbn'/>
-                <button><FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />Buscar</button>
+                <input 
+                    className='searchInput' 
+                    placeholder=' Buscar por título, autor, género o isbn' 
+                    type="text"
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}/>
+                <button onClick={handleSearchButton}>Buscar</button>
+                {error && <p>{error}</p>}
+                {books.map(book => (
+                        <div key={book.bookid} className='bookCard'>
+                            <img/>
+                            <div className='bookInfo'>
+                                <h4>{book.title}</h4>
+                                <h4>{book.author}</h4>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </nav>
         </>

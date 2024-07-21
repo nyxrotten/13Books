@@ -7,40 +7,10 @@ const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 
-//conexión a bbdd
-const pool = require('./config/db');
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-
-app.get('/books', async (req, res) => {
-  const client = await pool.connect();
-
-  try {
-    const result = await  client.query('select * from prueba_books');
-    console.log(result.rows);
-    if (result.rows.length <= 0) {
-      return res.status(404).send('No hay libros!');
-    }
-    res.json(result.rows);
-
-  } catch (err) {
-    res.status(500).send('Error del servidor');
-  } finally {
-    client.release();
-  }
-  
-});
-
-// app.post('/books', async (req, res) => {
-//   try {
-//     const insert = query('INSERT INTO BOOKS (title) VALUES ("Harry Potter")')
-//   } catch (err) {
-//     res.status(500).send('Error del servicor')
-//   }
-// })
-
-app.get('/', (req, res) => {
-  res.send('Hello world!');
-});
+const routes = require('./routes/bookRoutes');
+app.use('/', routes);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

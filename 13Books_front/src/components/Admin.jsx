@@ -16,10 +16,10 @@ function Admin( {books} ) {
         <Nav/>
         <main className='adminMain'>
         {books.map(book => (
-                        <div key={book.id} className='bookCardAdmin'>
+                        <div key={book.bookid} className='bookCardAdmin'>
                             <img/>
                             <div className='bookCardAdminInfo'>
-                                <h4>{book.name}</h4>
+                                <h4>{book.title}</h4>
                                 <p>{book.author}</p>
                                 <p>{book.isbn}</p>
                                 <p>{book.genre}</p>
