@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function Nav () {
     const [genre, setGenre] = useState('');
@@ -9,20 +10,16 @@ function Nav () {
     const handleSearch = async (urlApi) => {
         console.log(urlApi);
         try {
-          const response = await fetch(urlApi);
-          if (!response.ok) {
-            throw new Error('No disponemos de libros para ese género.');
-          }
-          const data = await response.json();
-          setBooks(data);
+          const response = await axios.get(urlApi);
+          setBooks(response.data);
           setError('');
         } catch (err) {
-          setError(err.message);
+          console.log(err.message);
+          setError('No se han encontrado libros para esta búsqueda.');
           setBooks([]);
         }
       };
-
-
+      
     const handleSearchButton = () => {
         //const queryParams = new URLSearchParams();
        // queryParams.append('searchtext', searchText);

@@ -101,7 +101,7 @@ const createBook = async (req, res) => {
         });
 
       const query = `INSERT INTO BOOKS (title, author, isbn, editorial, languaje, publication_date, price, genreid, stock, image, summary)
-                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`;
+                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`;
       const values = [title, author, isbn, editorial, language, publication_date, price, genreid, stock, image, summary];
      
       const result = await client.query(query, values);

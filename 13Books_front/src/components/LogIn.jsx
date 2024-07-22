@@ -1,9 +1,35 @@
+import { useState } from "react";
 import logo from '../assets/imgs/13Books-logo.png';
 import '../assets/CSS/login.css';
 import { Link } from 'react-router-dom';
-import Footer from './Footer'
+import Footer from './Footer';
+
+import { usePropertyContext } from "../context/PropertyContext";
+import { login } from './users/users';
+
 
 function LogIn() {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const {setUser} = usePropertyContext();
+
+    const doLogin = async () => {
+        try {
+            const dataLogin = await login(email, password);
+            localStorage.setItem('login', JSON.stringify(dataLogin));
+           
+            console.log(dataLogin.user);
+            setUser(dataLogin.user);
+
+            setMessage(`Bienvenido ${dataLogin.user.username}`);
+        } catch (error) {
+            setMessage('Usuario no registrado o Credenciales incorrectas!');
+            console.log(error.message);
+        }
+      };
+
 
     return(
         <>
@@ -20,16 +46,27 @@ function LogIn() {
         <main>
             <div className='logMain'>
                 <div className='logName'>
-                    <label>Nombre de usuario</label>
-                    <input />
+                    <label>Email usuario</label>
+                    <input
+                        type="text"
+                        placeholder="Email usuario"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                 </div>
                 <div className='logPass'>
                     <label>Contraseña</label>
-                    <input />
+                    <input
+                        type="password"
+                        placeholder="Contraseña"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                 </div>
                 <div className='logButt'>
-                    <button className='logEnt'>ENTRAR</button>
+                    <button className='logEnt' onClick={doLogin}>Iniciar Sesión</button>
                     <button clasNamge='logReg'><Link className='reactLink' to={('/register')}>Registrarse</Link></button>
+                    {message && <p>{message}</p>}
                 </div>
             </div>
         </main>

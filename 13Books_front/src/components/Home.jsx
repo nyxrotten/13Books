@@ -3,19 +3,29 @@ import Footer from './Footer';
 import Nav from './Nav'
 import { Link } from 'react-router-dom';
 import  '../assets/CSS/home.css';
-
+import { usePropertyContext } from "../context/PropertyContext";
 
 
 function Home({books}) {
 
+    const { user } = usePropertyContext();
 
     return(
         <>
             <header className='homeHeader'>
                 <img src={logo}/>
                 <div className='log'>
-                    <button className='logHome'> <Link className='reactLink' to={('/login')}>LogIn</Link></button>
-                    <button className='logHome'><Link className='reactLink'to={('/register')}>Registro</Link></button>
+                {user && user.username ? (
+                        <>
+                        <h1>Bienvenido, {user.username}</h1>
+                        <button className='logHome'> <Link className='reactLink' to={('/logout')}>LogOut</Link></button>
+                        </>
+                    ) : (
+                        <>
+                        <button className='logHome'> <Link className='reactLink' to={('/login')}>LogIn</Link></button>
+                        <button className='logHome'><Link className='reactLink'to={('/register')}>Registro</Link></button>
+                        </>
+                    )}
                 </div>
             </header>
             <Nav/>
