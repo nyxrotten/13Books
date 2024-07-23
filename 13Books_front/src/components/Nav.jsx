@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import  '../assets/CSS/nav.css'
+import { usePropertyContext } from "../context/PropertyContext";
+
 
 function Nav () {
     const [genre, setGenre] = useState('');
@@ -52,27 +55,34 @@ function Nav () {
                     <li onClick={() => handleSearchGenre('Ciencia Ficción')}>Ciencia Ficción</li>
                 </ul>
                 <div className='search'>
-                <input 
-                    className='searchInput' 
-                    placeholder=' Buscar por título, autor, género o isbn' 
+                <input
+                    className='searchInput'
+                    placeholder=' Buscar por título, autor, género o isbn'
                     type="text"
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}/>
                 <button onClick={handleSearchButton}>Buscar</button>
-                {error && <p>{error}</p>}
-                {books.map(book => (
-                        <div key={book.bookid} className='bookCard'>
-                            <img/>
-                            <div className='bookInfo'>
-                                <h4>{book.title}</h4>
-                                <h4>{book.author}</h4>
-                            </div>
-                        </div>
-                    ))}
                 </div>
             </nav>
+            <div className='searchErrorMessage'>
+              {error && <p>{error}</p>}
+            </div>
+            <div className="searchResult">
+              <div className='searchResultBooks'>
+                  {books.map(book => (
+                          <div key={book.bookid} className='bookCard'>
+                              <img/>
+                              <div className='bookInfo'>
+                                  <h4>{book.title}</h4>
+                                  <h4>{book.author}</h4>
+                              </div>
+                          </div>
+                      ))}
+              </div>
+          </div>
         </>
     )
 }
 
 export default Nav;
+

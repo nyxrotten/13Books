@@ -1,12 +1,16 @@
 import logo from '../assets/imgs/13Books-logo.png';
 import Footer from './Footer';
-import Nav from './Nav'
+import Nav from './Nav';
+import SearchResult from './changingComponents/SearchResult'
 import { Link } from 'react-router-dom';
 import  '../assets/CSS/home.css';
-import { usePropertyContext } from "../context/PropertyContext";
+import EditPage from './changingComponents/EditPage';
+import { usePropertyContext } from '../context/PropertyContext';
 
 
-function Home({books}) {
+
+
+function Home( {books}) {
 
     const { user } = usePropertyContext();
 
@@ -30,9 +34,13 @@ function Home({books}) {
             </header>
             <Nav/>
             <main className='homeMain'>
-                <h1>Destacados</h1>
-                <h3>Descubre el top ventas del mes</h3>
-                <div className='destacadosHome'>
+                
+                <div className='destacadosHomeTitulares'>
+                    <div>
+                        <h1>Destacados</h1>
+                        <h3>Descubre el top ventas del mes</h3>
+                    </div>
+                    <div className='destacadosHomeLibros'>
                     {books.map((book) => (
                         <div key={book.bookid} className='bookCard'>
                             <img/>
@@ -43,6 +51,8 @@ function Home({books}) {
                         </div>
                     ))}
                 </div>
+                </div>
+                
             </main>
             <Footer />
         </>

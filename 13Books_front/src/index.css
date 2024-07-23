@@ -1,12 +1,12 @@
 :root {
   font-family: 'Roboto Serif', serif;
-  --green-white: #dfedd9;
-  --coral: #d9796f;
+  --green-white: #f4f5fa;
+  --coral: #c04e42;
   --morado: #59519e;
-  --verde: #b5ceb4;
-  --mostaza: #d9c96f;
+  --verde: #b2b7de;
+  --mostaza: #e38f86;
   --verde-oscuro: #386c52;
-  --gris-oscuro: #403e4a;
+  --gris-oscuro: #2c2942;
 }
 
 * {

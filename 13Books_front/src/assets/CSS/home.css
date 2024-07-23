@@ -1,121 +1,3 @@
-header {
-    margin: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.log button {
-    width: 150px;
-    height: 50px;
-    font-family: 'Roboto Serif';
-    font-weight: 800;
-    color: var(--verde-oscuro);
-}
-
-.log button:first-child {
-    margin-right: 10px;
-    font-style: italic;
-    background-color: var(--green-white);
-    border: 7px solid var(--mostaza);
-}
-
-.log button:first-child:hover {
-    background-color: var(--mostaza);
-    font-style: normal;
-}
-
-.log button:last-child {
-    background-color: var(--mostaza);
-    border: none;
-    
-}
-
-.log button:last-child:hover {
-    background-color: var(--green-white);
-    border: 7px solid var(--mostaza);
-    font-style: italic;
-}
-
-.log button:first-child:active,
-.log button:last-child:active {
-    background-color: var(--morado);
-    border: none;
-    color: var(--green-white)
-}
-
-.etiquetas {
-    margin: 0px 40px;
-}
-.etiquetas ul {
-    display: flex;
-    justify-content: space-between;
-    column-gap: 10px;
-    list-style: none;
-}
-
-.etiquetas li {
-    font-style: italic;
-    padding: 5px 25px;
-    border: 3px solid var(--verde);
-}
-
-.etiquetas li:hover {
-    background-color: var(--mostaza);
-    border: 3px solid var(--mostaza);
-    font-weight: 600;
-}
-
-.etiquetas li:active {
-    background-color: var(--verde);
-    border: 3px solid var(--verde);
-}
-
-.search {
-    margin-top: 15px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    column-gap: 15px;
-}
-
-.searchInput {
-    font-family: 'Roboto Serif', serif;
-    font-style: italic;
-    height: 35px;
-    background-color: var(--verde);
-    border: none;
-    width: 100%;
-    padding-left: 15px;
-}
-
-.search button {
-    background-color: var(--green-white);
-    border: 4px solid var(--morado);
-    height: 35px;
-    width: 120px;
-    font-family: 'Roboto Serif', serif;
-    font-style: italic;
-    font-weight: 800;
-    color: var(--morado);
-    padding: 0px 10px 0px 5px;
-}
-
-.search button:hover {
-    background-color: var(--morado);
-    color: var(--green-white)
-}
-
-.search button:active {
-    background-color: var(--mostaza);
-    border: 4px solid var(--mostaza);
-    color: var(--morado);
-}
-.search button i {
-    color: var(--morado);
-    padding-right: 10px;
-}
 
 .homeMain {
     width: 100%;
@@ -137,23 +19,18 @@ header {
     padding: 5px 10px;
 }
 
-.destacadosHome {
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    column-gap: 20px;
-
-}
-
-.bookCard {
+.destacadosHomeTitulares {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30%;
-    height: 200px;
+    text-align: center;
 }
 
-.bookInfo {
-    border: 4px solid var(--mostaza);
+.destacadosHomeLibros {
+    display: flex;
+    flex-direction: row;
 }
 
+.bookCards {
+    width: 55%;
+}

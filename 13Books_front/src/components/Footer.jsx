@@ -15,9 +15,9 @@ function Footer() {
                     <p>Contacta con nosotros</p>
                 </div>
                 <div>
-                    {/* <FontAwesomeIcon icon="fa-brands fa-instagram" />
-                    <FontAwesomeIcon icon="fa-brands fa-x-twitter" />
-                    <FontAwesomeIcon icon="fa-brands fa-tiktok" /> */}
+                    <i className="fa-brands fa-instagram" />
+                    <i className="fa-brands fa-x-twitter" />
+                    <i className="fa-brands fa-tiktok" />
                 </div>
             </footer> 
         </>

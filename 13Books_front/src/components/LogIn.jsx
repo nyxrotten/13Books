@@ -1,7 +1,7 @@
 import { useState } from "react";
-import logo from '../assets/imgs/13Books-logo.png';
-import '../assets/CSS/login.css';
 import { Link } from 'react-router-dom';
+import '../assets/CSS/loginRegister.css';
+import logo from '../assets/imgs/13Books-logo.png';
 import Footer from './Footer';
 
 import { usePropertyContext } from "../context/PropertyContext";
@@ -25,7 +25,7 @@ function LogIn() {
 
             setMessage(`Bienvenido ${dataLogin.user.username}`);
         } catch (error) {
-            setMessage('Usuario no registrado o Credenciales incorrectas!');
+            setMessage('¡Usuario no registrado o credenciales incorrectas!');
             console.log(error.message);
         }
       };
@@ -36,15 +36,16 @@ function LogIn() {
         <header className='loginHeader'>
                 <Link to={('/')}><img src={logo}/></Link>
                 <div className='user'>
-                <i class="fa-solid fa-user"></i>
+                <i className="fa-solid fa-user"></i>
                 </div>
         </header>
         <nav className='logNav'>
-            <div><Link className='reactLink' to={('/')}>< i class="fa-solid fa-house"/></Link></div>
+            <div><Link className='reactLink' to={('/')}><i className="fa-solid fa-house"/></Link></div>
             <div><p>Login</p></div>
         </nav>
         <main>
             <div className='logMain'>
+            <div className="errorMessage">{message && <p>{message}</p>}</div>
                 <div className='logName'>
                     <label>Email usuario</label>
                     <input
@@ -65,8 +66,7 @@ function LogIn() {
                 </div>
                 <div className='logButt'>
                     <button className='logEnt' onClick={doLogin}>Iniciar Sesión</button>
-                    <button clasNamge='logReg'><Link className='reactLink' to={('/register')}>Registrarse</Link></button>
-                    {message && <p>{message}</p>}
+                    <button className='logReg'><Link className='reactLink' to={('/register')}>Registrarse</Link></button>
                 </div>
             </div>
         </main>
