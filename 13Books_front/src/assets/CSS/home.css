@@ -13,7 +13,7 @@
     font-weight: 600 ;
 }
 
-.homeMain h3 {
+.destacadosHomeTitulares h3 {
     font-weight: 300;
     border: 2px solid var(--mostaza);
     padding: 5px 10px;
@@ -27,10 +27,44 @@
 }
 
 .destacadosHomeLibros {
+    margin-top: 25px;
+    width: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 20px;
+    row-gap: 20px;
 }
 
-.bookCards {
-    width: 55%;
+.bookCardDestacados {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
 }
+
+
+.bookCardDestacados img {
+    width: 200px;
+}
+
+.bookInfoDestacados {
+    width: 250px;
+    border: 3px solid var(--verde);
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.bookInfoDestacados h4,
+.bookCardDestacados h5 {
+    font-weight: 300;
+}
+
+.bookCardDestacados h5 {
+    font-style: italic;
+    margin-top: 5px;
+}
+

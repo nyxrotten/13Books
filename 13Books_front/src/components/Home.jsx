@@ -17,7 +17,7 @@ function Home( {books}) {
     return(
         <>
             <header className='homeHeader'>
-                <img src={logo}/>
+                <Link to={'/'}><img src={logo}/></Link>
                 <div className='log'>
                 {user && user.username ? (
                         <>
@@ -40,19 +40,24 @@ function Home( {books}) {
                         <h1>Destacados</h1>
                         <h3>Descubre el top ventas del mes</h3>
                     </div>
+                </div>
                     <div className='destacadosHomeLibros'>
                     {books.map((book) => (
-                        <div key={book.bookid} className='bookCard'>
-                            <img/>
-                            <div className='bookInfo'>
+                        
+                        <div key={book.bookid} className='bookCardDestacados'>
+                            <Link className='reactLink' to={`/${book.title}`}>
+                            <img src={book.image}/>
+                            <div className='bookInfoDestacados'>
                                 <h4>{book.title}</h4>
-                                <h4>{book.author}</h4>
+                                <h5>{book.author}</h5>
                             </div>
+                            </Link>
+
                         </div>
+                       
+                        
                     ))}
                 </div>
-                </div>
-                
             </main>
             <Footer />
         </>
