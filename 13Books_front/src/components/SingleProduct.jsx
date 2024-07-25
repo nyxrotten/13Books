@@ -1,46 +1,56 @@
+import Header from './Header';
 import Footer from './Footer';
-import logo from '../assets/imgs/13Books-logo.png';
 import { Link } from 'react-router-dom';
 import  '../assets/CSS/singleProduct.css';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 
 function SingleProduct(){
 
+    const { id } = useParams();
+    const [book, setBook] = useState(null);
+
+    const handleSearch = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8080/books/${id}`);
+          console.log(response);
+          setBook(response.data);
+          setError('');
+        } catch (err) {
+          console.log(err.message);
+          setError('Ha ocurrido un error buscando los datos del libro. Inténtalo más tarde!');
+          setBook(null);
+        }
+      };
+      
+    useEffect(() => {
+        handleSearch();
+      }, [id]);
+
+    if (!book) {
+        return <div>Cargando...</div>;
+    }
+
+    const anioPublicacion = (book.publication_date) ? new Date(book.publication_date).getFullYear() : '';
+
     return(
         <>
-            <header className='singleProductHeader'>
-                <img src={logo}/>
-                <div className='log'>
-                    <button className='logHome'> <Link className='reactLink' to={('/login')}>LogIn</Link></button>
-                    <button className='logHome'><Link className='reactLink'to={('/register')}>Registro</Link></button>
-                </div>
-            </header>
-            <nav className='breadCrumbs'></nav>
+            <Header />
             <main>
-                <div>
-                    <img/>
-                </div>
-                <div>
-                    <h2>El Señor de los Anillos: La comunidad del Anillo</h2>
-                    <h3>J.R.R. Tolkien</h3>
-                    <h4>ISBN 978844501805</h4>
-                    <p>La primera entrega de la trilogía de J. R. R. Tolkien El Señor de los Anillos. Empieza tu viaje a la Tierra Media. Edición revisada. Un héroe inesperado. Una misión peligrosa. La
-                        mayor aventura que jamás te hayan contado. En la adormecida e idílica Comarca, un joven hobbit recibe un encargo: custodiar el Anillo Único y emprender el viaje para su destrucción
-                        en la Grieta del Destino. Acompañado por magos, hombres, elfos y enanos, atravesará la Tierra Media y se internará en las sombras de Mordor, perseguido siempre por las huestes de
-                        Sauron, el Señor Oscuro, dispuesto a recuperar su creación para establecer el dominio definitivo del Mal.</p>
-                    <section>
-                        <div>
-                            <p>Fantástica</p>
-                        </div>
-                        <div>
-                            <p>J.R.R. Tolkien</p>
-                        </div>
-                    </section>
-                    <section>
-                        <h3>12.95€</h3>
-                    </section>
+                
+                <div key={book.bookid} >
+                    <h1>{book.title}</h1>
+                    <h2><span>Autor: </span>{book.author}</h2>
+                    <img src={book.image} alt={book.title} />
+                    <p><span>Editorial: </span>{book.editorial}</p> 
+                    <p><span>Año de publicación: </span>{anioPublicacion}</p> 
+                    <p><span>Genero: </span>{book.genre}</p> 
+                    <p>{book.summary}</p> 
+                    <p><span>Stock: </span>{book.stock}</p> 
                 </div>
             </main>
-        
             <Footer />
         </>
     )

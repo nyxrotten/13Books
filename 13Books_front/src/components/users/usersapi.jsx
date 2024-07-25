@@ -2,11 +2,11 @@ import axios from 'axios';
 
 const urlApi = 'http://localhost:8080/users';
 
-export const register = async  (username, email, password) => {
+export const register = async  (name, surname, city, username, email, password) => {
    /* console.log('username: ' + username);
     console.log('email: ' + email);
     console.log('password: ' +password);*/
-    const response = await axios.post(`${urlApi}/register`, {username, email, password});
+    const response = await axios.post(`${urlApi}/register`, {name, surname, city, username, email, password});
     return response.data;
 };
   

@@ -23,7 +23,7 @@ const showBookById = async (req, res) => {
     const client = await pool.connect();
     try {
         const { bookId } = req.params;
-        const result = await client.query('SELECT * FROM books WHERE bookid = $1', [bookId]);
+        const result = await client.query('SELECT * FROM books as bk JOIN  genres as gd ON bk.genreid = gd.genreid WHERE bookid = $1', [bookId]);
         if (result.rows.length === 0) {
             return res.status(404).json({ error: 'Libro no encontrado!' });
         }

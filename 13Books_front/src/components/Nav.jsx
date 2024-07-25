@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import  '../assets/CSS/nav.css'
+import  '../assets/CSS/nav.css';
+import { Link } from 'react-router-dom';
 import { usePropertyContext } from "../context/PropertyContext";
 
 
@@ -71,11 +72,13 @@ function Nav () {
               <div className='searchResultBooks'>
                   {books.map(book => (
                           <div key={book.bookid} className='bookCard'>
-                              <img/>
+                             <Link className='reactLink'  to={`/books/${book.bookid}`}>
+                              <img src={book.image}/>
                               <div className='bookInfo'>
                                   <h4>{book.title}</h4>
                                   <h4>{book.author}</h4>
                               </div>
+                              </Link>
                           </div>
                       ))}
               </div>

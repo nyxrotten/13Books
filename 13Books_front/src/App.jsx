@@ -33,6 +33,7 @@ function App() {
           <Route path="/register" element={<Register />}/>
           <Route path="/admin" element={<Admin books={books}/>}/>
           <Route path="/logout" element={<Logout/>}/>
+          <Route path="/books/:id" element={<SingleProduct />} /> 
           //Esta ruta está así para poder visualizarla al para maquetar:
           <Route path="/singleproduct" element={<SingleProduct/>}/>
           </Routes>

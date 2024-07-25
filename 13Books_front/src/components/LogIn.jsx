@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../assets/CSS/loginRegister.css';
 import logo from '../assets/imgs/13Books-logo.png';
 import Footer from './Footer';
 
 import { usePropertyContext } from "../context/PropertyContext";
-import { login } from './users/users';
+import { login } from './users/usersapi';
 
 
 function LogIn() {
@@ -14,6 +14,7 @@ function LogIn() {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const {setUser} = usePropertyContext();
+    const navigate = useNavigate();
 
     const doLogin = async () => {
         try {
@@ -23,7 +24,8 @@ function LogIn() {
             console.log(dataLogin.user);
             setUser(dataLogin.user);
 
-            setMessage(`Bienvenido ${dataLogin.user.username}`);
+            setMessage(`Bienvenid@ ${dataLogin.user.username}`);
+            navigate('/');
         } catch (error) {
             setMessage('¡Usuario no registrado o credenciales incorrectas!');
             console.log(error.message);

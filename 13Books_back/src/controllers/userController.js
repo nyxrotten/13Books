@@ -6,19 +6,20 @@ const bcrypt = require('bcryptjs');
 const register = async (req, res) => {
     const client = await pool.connect();
     try {
-        const { username, email, password } = req.body;
+       
+        const { name, surname, city, username, email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
 
         console.log('username en bk: ' + username);
         console.log('email en bk: ' + email);
         console.log('password en bk: ' +password);
-        if (!username || !email || !password) {
+        if (!name || !surname || !city || !username || !email || !password) {
             return res.status(400).json({ error: 'Introduce datos correctos. Todos los campos son obligatorios!' });
         }
 
-        const query = `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *`;
+        const query = `INSERT INTO clients (name, surname, city, username, email, password) VALUES ($1, $2, $3 ,$4, $5, $6) RETURNING *`;
         //const values = [username, email, password];
-        const values = [username, email, hashedPassword];
+        const values = [name, surname, city, username, email, hashedPassword];
         const result = await client.query(query, values);
 
         const user = result.rows[0];
@@ -41,7 +42,7 @@ const loginUser = async (req, res) => {
         console.log('email en bk: ' + email);
         console.log('password en bk: ' + password);
 
-        const result = await client.query('SELECT * FROM users WHERE email = $1', [email]);
+        const result = await client.query('SELECT * FROM clients WHERE email = $1', [email]);
         if (result.rows.length === 0) {
             return res.status(400).json({ error: 'Usuario no encontrado.' });
         }
