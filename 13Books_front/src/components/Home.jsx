@@ -35,29 +35,28 @@ function Home( {books}) {
             <Nav/>
             <main className='homeMain'>
                 
-                <div className='destacadosHomeTitulares'>
+                {/* <div className='destacadosHomeTitulares'>
                     <div>
                         <h1>Destacados</h1>
                         <h3>Descubre el top ventas del mes</h3>
                     </div>
                 </div>
-                    <div className='destacadosHomeLibros'>
+                        <div className='destacadosHomeLibros'>
                     {books.map((book) => (
                         
-                        <div key={book.bookid} className='bookCardDestacados'>
+                        <div key={book.bookid} className='bookCard'>
                             <Link className='reactLink' to={`/${book.title}`}>
                             <img src={book.image}/>
-                            <div className='bookInfoDestacados'>
+                            <div className='bookInfo'>
                                 <h4>{book.title}</h4>
                                 <h5>{book.author}</h5>
                             </div>
                             </Link>
 
                         </div>
-                       
                         
                     ))}
-                </div>
+                </div> */}
             </main>
             <Footer />
         </>

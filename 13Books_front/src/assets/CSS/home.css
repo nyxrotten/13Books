@@ -37,34 +37,47 @@
     row-gap: 20px;
 }
 
-.bookCardDestacados {
+.bookCard {
     width: 25%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    
+    justify-content: center;
+    padding: 10px;
+    max-height: 450px;
+    margin-top: 20px;
+    transition: background 0.5s, color 0.5s;
 }
 
 
-.bookCardDestacados img {
-    width: 200px;
+.bookCard img {
+    max-height: 250px;
 }
 
-.bookInfoDestacados {
+.bookInfo {
     width: 250px;
     border: 3px solid var(--verde);
     padding: 15px;
     margin-top: 20px;
 }
 
-.bookInfoDestacados h4,
-.bookCardDestacados h5 {
+.bookInfo h4,
+.bookCard h5 {
     font-weight: 300;
 }
 
-.bookCardDestacados h5 {
+.bookCard h5 {
     font-style: italic;
     margin-top: 5px;
 }
 
+.bookCard:hover {
+    font-weight: 500;
+    color: var(--gris-oscuro);
+    background: var(--verde);
+}
+
+.reactLink:active {
+    color: white;
+}
