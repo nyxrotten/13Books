@@ -9,16 +9,13 @@ const register = async (req, res) => {
        
         const { name, surname, city, username, email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
-
-        console.log('username en bk: ' + username);
-        console.log('email en bk: ' + email);
-        console.log('password en bk: ' +password);
+      
         if (!name || !surname || !city || !username || !email || !password) {
             return res.status(400).json({ error: 'Introduce datos correctos. Todos los campos son obligatorios!' });
         }
 
-        const query = `INSERT INTO clients (name, surname, city, username, email, password) VALUES ($1, $2, $3 ,$4, $5, $6) RETURNING *`;
-        //const values = [username, email, password];
+        const query = `INSERT INTO clients (name, surname, city, username, email, password, role) VALUES ($1, $2, $3 ,$4, $5, $6, 'user') RETURNING *`;
+       
         const values = [name, surname, city, username, email, hashedPassword];
         const result = await client.query(query, values);
 

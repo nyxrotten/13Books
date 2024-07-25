@@ -10,6 +10,7 @@ function Nav () {
     const [searchText, setSearchText] = useState('');
     const [books, setBooks] = useState([]);
     const [error, setError] = useState('');
+    const { user } = usePropertyContext();
   
     const handleSearch = async (urlApi) => {
         console.log(urlApi);
@@ -26,7 +27,7 @@ function Nav () {
       
     const handleSearchButton = () => {
         //const queryParams = new URLSearchParams();
-       // queryParams.append('searchtext', searchText);
+        // queryParams.append('searchtext', searchText);
         //const apiUrl = `http://localhost:8080/books/search?${queryParams.toString()}`;
         setSearchText(searchText.toLowerCase());
         const apiUrl = `http://localhost:8080/books/search/${searchText}`;
@@ -79,6 +80,19 @@ function Nav () {
                                   <h4>{book.author}</h4>
                               </div>
                               </Link>
+                              {(user && user.role === 'user') ? (
+                                <div>
+                                   <p>{book.price}</p>
+                                  <button>Añadir carrito</button>
+                                </div>
+                              )
+                              :
+                              (user && user.role === 'admin') && (
+                                <div>
+                                  <button><Link className='reactLink' to={`/editbook/${book.bookid}`}>Editar Libro</Link></button>
+                                </div>
+                              )}
+                           
                           </div>
                       ))}
               </div>

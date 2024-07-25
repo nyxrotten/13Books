@@ -5,9 +5,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home'
 import LogIn from './components/LogIn';
 import Logout from './components/Logout';
-import Register from './components/Register'
-import Admin from './components/Admin'
+import Register from './components/Register';
+import Admin from './components/Admin';
 import SingleProduct from './components/SingleProduct';
+import EditPage from './components/changingComponents/EditPage';
 import { PropertyProvider } from './context/PropertyContext';
 
 function App() {
@@ -34,8 +35,7 @@ function App() {
           <Route path="/admin" element={<Admin books={books}/>}/>
           <Route path="/logout" element={<Logout/>}/>
           <Route path="/books/:id" element={<SingleProduct />} /> 
-          //Esta ruta está así para poder visualizarla al para maquetar:
-          <Route path="/singleproduct" element={<SingleProduct/>}/>
+          <Route path="/editbook/:id" element={<EditPage />} />    
           </Routes>
       </Router>
     </PropertyProvider>

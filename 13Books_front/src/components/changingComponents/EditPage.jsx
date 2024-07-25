@@ -1,9 +1,13 @@
-import '../../assets/CSS/editpage.css'
+import '../../assets/CSS/editpage.css';
+import Header from '../Header';
+import Footer from '../Footer';
+
 
 function EditPage() {
 
     return (
-    <>
+        <>
+        <Header />
         <div className="editBox">
             <div>
                 <label type="text">Título</label>
@@ -39,10 +43,9 @@ function EditPage() {
                 <button>Guardar</button>
             </div>
         </div>
-
-    </>
-)
-
+        <Footer />
+        </>
+    )
 }
 
 export default EditPage;
