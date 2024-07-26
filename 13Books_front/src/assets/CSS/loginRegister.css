@@ -10,14 +10,16 @@
     color: var(--morado);
 }
 
-.logNav {
+.logNav,
+.carritoNav {
     display: flex;
     column-gap: 10px;
     margin-left: 50px;
     margin-bottom: 60px;
 }
 
-.logNav div {
+.logNav div,
+.carritoNav div {
     background-color: var(--verde);
     height: 35px;
     display: flex;
@@ -25,16 +27,19 @@
     justify-content: center;
 }
 
-.logNav div:first-child {
+.logNav div:first-child,
+.carritoNav div:first-child {
     width: 35px;
     font-size: 1.2em;
     color: var(--green-white)
 }
 
-.logNav div:first-child i {
+.logNav div:first-child i,
+.carritoNav div:first-child i {
     color: var(--green-white);
 }
-.logNav div:last-child {
+.logNav div:last-child,
+.carritoNav div:last-child {
     font-style: italic;
     width: 120px;
 }

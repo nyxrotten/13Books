@@ -38,7 +38,7 @@ function LogIn() {
         <header className='loginHeader'>
                 <Link to={('/')}><img src={logo}/></Link>
                 <div className='user'>
-                <i className="fa-solid fa-user"></i>
+                <i className="fa-solid fa-user"/>
                 </div>
         </header>
         <nav className='logNav'>

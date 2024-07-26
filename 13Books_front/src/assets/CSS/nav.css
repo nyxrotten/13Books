@@ -44,6 +44,36 @@ header {
     color: var(--green-white)
 }
 
+.logued {
+    display: flex;
+    align-items: center;
+    color: var(--morado);
+}
+
+.logued .reactLink {
+    display: flex;
+    color: var(--verde);
+}
+
+.logued i {
+    font-size: 1.7em;
+    margin-right: 15px;
+}
+
+.counterCarrito {
+    background-color: var(--coral);
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    color: var(--green-white);
+    position: relative;
+    left: 35px;
+    top: 10px;
+}
+
+
 .etiquetas {
     margin: 0px 40px;
 }
@@ -134,7 +164,6 @@ header {
 
 }
 
-
 .searchErrorMessage {
     color: var(--coral);
     font-weight: 600;
@@ -146,3 +175,4 @@ header {
 
     
 }
+

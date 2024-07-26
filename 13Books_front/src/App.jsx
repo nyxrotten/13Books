@@ -9,6 +9,7 @@ import Register from './components/Register';
 import Admin from './components/Admin';
 import SingleProduct from './components/SingleProduct';
 import EditPage from './components/changingComponents/EditPage';
+import Carrito from './components/changingComponents/Carrito';
 import { PropertyProvider } from './context/PropertyContext';
 
 function App() {
@@ -34,8 +35,9 @@ function App() {
           <Route path="/register" element={<Register />}/>
           <Route path="/admin" element={<Admin books={books}/>}/>
           <Route path="/logout" element={<Logout/>}/>
-          <Route path="/books/:id" element={<SingleProduct />} /> 
-          <Route path="/editbook/:id" element={<EditPage />} />    
+          <Route path="/books/:id" element={<SingleProduct />} />
+          <Route path="/editbook/:id" element={<EditPage />} />
+          <Route path="/carrito" element={<Carrito books={books}/>}/>
           </Routes>
       </Router>
     </PropertyProvider>

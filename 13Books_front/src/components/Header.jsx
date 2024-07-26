@@ -13,10 +13,15 @@ function Header() {
                 <Link to={'/'}><img src={logo}/></Link>
                 <div className='log'>
                 {user && user.username ? (
-                        <>
-                        <h1>Bienvenid@, {user.username}</h1>
-                        <button className='logHome'> <Link className='reactLink' to={('/logout')}>LogOut</Link></button>
-                        </>
+                        <div className='logued'>
+                        <h3>Bienvenid@, {user.username}</h3>
+                        
+                        <Link to={'/carrito'} className='reactLink'>
+                            <div className='counterCarrito'><p>0</p></div>
+                            <i className="fa-solid fa-cart-shopping" />
+                        </Link>
+                        {/* <button className='logHome'> <Link className='reactLink' to={('/logout')}>LogOut</Link></button> */}
+                        </div>
                     ) : (
                         <>
                         <button className='logHome'> <Link className='reactLink' to={('/login')}>LogIn</Link></button>

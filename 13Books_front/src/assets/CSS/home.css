@@ -60,10 +60,16 @@
     border: 3px solid var(--verde);
     padding: 15px;
     margin-top: 20px;
+    line-height: 20px;
+    color: var(--gris-oscuro)
 }
 
-.bookInfo h4,
-.bookCard h5 {
+.bookInfo h4 {
+    font-weight: 500;
+}
+
+.bookInfo h4:nth-child(2) {
+    font-style: italic;
     font-weight: 300;
 }
 
@@ -72,6 +78,9 @@
     margin-top: 5px;
 }
 
+.bookCard p {
+    font-weight: 700;
+}
 .bookCard:hover {
     font-weight: 500;
     color: var(--gris-oscuro);
@@ -80,4 +89,17 @@
 
 .reactLink:active {
     color: white;
+}
+
+.botonCarrito {
+    margin-top: 5px;
+    padding: 5px 10px;
+    font-family: 'Roboto Serif';
+    border: none;
+    background-color: var(--verde);
+}
+
+.botonCarrito:hover {
+    background-color: var(--coral);
+    color: var(--green-white);
 }

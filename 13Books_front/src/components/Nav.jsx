@@ -73,26 +73,25 @@ function Nav () {
               <div className='searchResultBooks'>
                   {books.map(book => (
                           <div key={book.bookid} className='bookCard'>
-                             <Link className='reactLink'  to={`/books/${book.bookid}`}>
+                              <Link className='reactLink'  to={`/books/${book.bookid}`}>
                               <img src={book.image}/>
                               <div className='bookInfo'>
                                   <h4>{book.title}</h4>
                                   <h4>{book.author}</h4>
+                                  {(user && user.role === 'user') ? (
+                                    <>
+                                      <p>{book.price} €</p>
+                                      <button className="botonCarrito">Añadir al carrito</button>
+                                    </>
+                                )
+                                :
+                                (user && user.role === 'admin') && (
+                                  <div>
+                                    <button><Link className='reactLink' to={`/editbook/${book.bookid}`}>Editar Libro</Link></button>
+                                  </div>
+                                )}
                               </div>
                               </Link>
-                              {(user && user.role === 'user') ? (
-                                <div>
-                                   <p>{book.price}</p>
-                                  <button>Añadir carrito</button>
-                                </div>
-                              )
-                              :
-                              (user && user.role === 'admin') && (
-                                <div>
-                                  <button><Link className='reactLink' to={`/editbook/${book.bookid}`}>Editar Libro</Link></button>
-                                </div>
-                              )}
-                           
                           </div>
                       ))}
               </div>
