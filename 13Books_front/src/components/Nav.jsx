@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import  '../assets/CSS/nav.css';
 import { Link } from 'react-router-dom';
 import { useBooksContext } from '../context/BooksContext';
 import useRequest from '../hooks/useRequest';
 
+
 function Nav () {
     const [genre, setGenre] = useState('');
     const [searchText, setSearchText] = useState('');
-    const [books, setBooks] = useState([]);
     const [error, setError] = useState('');
     const { user } = useBooksContext();
     const { get } = useRequest();
-  
+    const {books, setBooks} = useBooksContext();
+
     const handleSearch = async (urlApi) => {
       console.log(urlApi);
       try {
         const data = await get(urlApi);
         setBooks(data);
+        console.log(data);
         setError('');
       } catch (error) {
         console.log(error.message);

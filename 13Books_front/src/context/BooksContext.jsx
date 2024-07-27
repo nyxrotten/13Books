@@ -4,7 +4,7 @@ const BooksContext = createContext();
 
 export const BooksProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  const [book, setBook] = useState([]);
+  const [books, setBooks] = useState([]);
 
   // compruebo si estoy logado en el localstorage y si es así relleno el setUser
   useEffect(() => {
@@ -15,7 +15,7 @@ export const BooksProvider = ({ children }) => {
   }, []);
 
   return (
-    <BooksContext.Provider value={{book, setBook, user, setUser }}>
+    <BooksContext.Provider value={{books, setBooks, user, setUser }}>
       {children}
     </BooksContext.Provider>
   );

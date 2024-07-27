@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/useRequest';
-import { useBooksContext } from '../context/BooksContext';
 
 function SingleProduct(){
 
@@ -14,16 +13,16 @@ function SingleProduct(){
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const { get } = useRequest();
-    const {book, setBook} = useBooksContext();
+    const [book, setBook] = useState({});
 
     const handleSearch = async () => {
         try {
           const data = await get(`${id}`);
-          console.log(data);
+         
           setBook(data);
           setError('');
-        } catch (err) {
-          console.log(err.message);
+        } catch (error) {
+          console.log(error.message);
           setError('Ha ocurrido un error buscando los datos del libro. Inténtalo más tarde!');
           setBook(null);
         }

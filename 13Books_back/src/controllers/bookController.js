@@ -105,24 +105,68 @@ const createBook = async (req, res) => {
       const values = [title, author, isbn, editorial, language, publication_date, price, genreid, stock, image, summary];
      
       const result = await client.query(query, values);
-      res.status(201).json(result.rows[0]);
+      res.status(201).json({ book: result.rows[0] });
     } catch (err) {
       res.status(500).json({ error: err.message });
     } finally {
       client.release();
     }
-    res.redirect(200, '/');
 }
 
 const updateBook = async (req, res) => {
 
     console.log('entro por updateBook');
-	res.redirect(200, '/');
+    const { bookId } = req.params;
+    console.log('bookId '+ bookId);
+    const client = await pool.connect();
+    try {
+      const { title, author, isbn, editorial, language, publication_date, price, genreid, stock, image, summary } = req.body;
+      if (!req.body) 
+        return res.status(400).send({
+            error: 'Los datos para modificar el libro son incorrectos. Intentalo de nuevo!'
+        });
+
+      const query = `UPDATE BOOKS
+                     SET bookid=$1, title=$2, author=$3, isbn=$4, editorial=$5, languaje=$6,
+                         publication_date=$7, price=$8, genreid=$9, stock=$10, image=$11 summary=$12
+                     WHERE  WHERE bookid = $12
+                     RETURNING *
+                    `;
+      const values = [title, author, isbn, editorial, language, publication_date, price, genreid, stock, image, summary, bookId];
+     
+      const result = await client.query(query, values);
+      if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'El libro no ha podido modificarse. Revise los datos!' });
+      }
+
+      res.status(200).json({ book: result.rows[0] });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    } finally {
+      client.release();
+    }
+	
 }
 
 const deleteBook = async (req, res) => {
     console.log('entro por deleteBook');
-	res.redirect(200, '/');
+    const { bookId } = req.params;
+    console.log('bookId ' + bookId);
+    const client = await pool.connect();
+    try {
+        const query = 'DELETE FROM books WHERE bookid = $1 RETURNING *';
+        const values = [bookId];
+
+        const result = await client.query(query, values);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'El libro no ha podido eliminarse. Revise los datos!' });
+        }
+        res.status(200).json({ book: result.rows[0] });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    } finally {
+        client.release();
+    }
 }
 
 // #endregion

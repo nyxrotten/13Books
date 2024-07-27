@@ -23,7 +23,6 @@ function LogIn() {
            
             console.log(dataLogin.user);
             setUser(dataLogin.user);
-
             setMessage(`Bienvenid@ ${dataLogin.user.username}`);
             navigate('/');
         } catch (error) {

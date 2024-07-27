@@ -32,6 +32,7 @@ function Register() {
                 console.log(dataRegister.user);
                 
                 setUser(dataRegister.user);
+                alert(`Usuario ${dataRegister.user.username} registrado correctamente!`);
                 setMessage(`Usuario ${dataRegister.user.username} registrado.`);
                 navigate('/');
             } catch (error) {
