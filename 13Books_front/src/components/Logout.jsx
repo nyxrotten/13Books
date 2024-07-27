@@ -1,12 +1,13 @@
 
 import { useEffect } from 'react';
-import { logout } from './users/usersapi';
 import { useNavigate } from 'react-router-dom';
-import { usePropertyContext } from "../context/PropertyContext";
+import { useBooksContext } from '../context/BooksContext';
+import useRequestUsers from '../hooks/useRequestUsers';
 
 const Logout = () => {
-    const { setUser } = usePropertyContext();
+    const { setUser } = useBooksContext();
     const navigate = useNavigate();
+    const { logout } = useRequestUsers();
 
     const doLogout = async () => {
         try {

@@ -1,7 +1,8 @@
 import logo from '../assets/imgs/13Books-logo.png';
 import Nav from'./Nav';
-import '../assets/CSS/admin.css'
-import {Link} from 'react-router-dom'
+import '../assets/CSS/admin.css';
+import {Link} from 'react-router-dom';
+
 
 function Admin( {books} ) {
     return (

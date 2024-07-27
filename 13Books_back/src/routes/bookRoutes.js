@@ -1,6 +1,7 @@
 
 const express = require("express");
 const router = express.Router();
+const authToken = require('../middlewares/authMiddleware');
 
 const {
 	showBooks,
@@ -21,10 +22,10 @@ router.get('/books/genre/:genre', showBooksByGenre);
 
 router.get('/books/search/:searchtext', searchBooks);
 
-router.post('/books', createBook);
+router.post('/books', authToken, createBook);
 
-router.put('/books/:bookId', updateBook);
+router.put('/books/:bookId', authToken, updateBook);
 
-router.delete('/books/:bookId', deleteBook);
+router.delete('/books/:bookId', authToken, deleteBook);
 
 module.exports = router;

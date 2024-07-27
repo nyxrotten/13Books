@@ -10,7 +10,7 @@ import Admin from './components/Admin';
 import SingleProduct from './components/SingleProduct';
 import EditPage from './components/changingComponents/EditPage';
 import Carrito from './components/changingComponents/Carrito';
-import { PropertyProvider } from './context/PropertyContext';
+import { BooksProvider } from './context/BooksContext';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -27,7 +27,7 @@ function App() {
 
   return (
     <>
-     <PropertyProvider>  
+     <BooksProvider>  
       <Router>
         <Routes>
           <Route path="/" element={<Home books={books}/>}/>
@@ -40,7 +40,7 @@ function App() {
           <Route path="/carrito" element={<Carrito books={books}/>}/>
           </Routes>
       </Router>
-    </PropertyProvider>
+    </BooksProvider>
     </>
   );
 }

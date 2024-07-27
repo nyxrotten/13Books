@@ -3,13 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../assets/CSS/loginRegister.css';
 import logo from '../assets/imgs/13Books-logo.png';
 import Footer from './Footer';
-
-import { usePropertyContext } from "../context/PropertyContext";
-import { register } from './users/usersapi';
+import { useBooksContext } from '../context/BooksContext';
+import useRequestUsers from '../hooks/useRequestUsers';
 
 function Register() {
 
-    const {setUser} = usePropertyContext();
+    const {setUser} = useBooksContext();
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [city, setCity] = useState('');
@@ -18,6 +17,7 @@ function Register() {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
+    const { register } = useRequestUsers();
 
     const handleRegister = async () => {
 

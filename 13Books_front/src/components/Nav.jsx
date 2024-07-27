@@ -1,47 +1,42 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import  '../assets/CSS/nav.css';
 import { Link } from 'react-router-dom';
-import { usePropertyContext } from "../context/PropertyContext";
-
+import { useBooksContext } from '../context/BooksContext';
+import useRequest from '../hooks/useRequest';
 
 function Nav () {
     const [genre, setGenre] = useState('');
     const [searchText, setSearchText] = useState('');
     const [books, setBooks] = useState([]);
     const [error, setError] = useState('');
-    const { user } = usePropertyContext();
+    const { user } = useBooksContext();
+    const { get } = useRequest();
   
     const handleSearch = async (urlApi) => {
-        console.log(urlApi);
-        try {
-          const response = await axios.get(urlApi);
-          setBooks(response.data);
-          setError('');
-        } catch (err) {
-          console.log(err.message);
-          setError('No se han encontrado libros para esta búsqueda.');
-          setBooks([]);
-        }
-      };
+      console.log(urlApi);
+      try {
+        const data = await get(urlApi);
+        setBooks(data);
+        setError('');
+      } catch (error) {
+        console.log(error.message);
+        setError('No se han encontrado libros para esta búsqueda.');
+        setBooks([]);
+      }
+    };
       
     const handleSearchButton = () => {
-        //const queryParams = new URLSearchParams();
-        // queryParams.append('searchtext', searchText);
-        //const apiUrl = `http://localhost:8080/books/search?${queryParams.toString()}`;
         setSearchText(searchText.toLowerCase());
-        const apiUrl = `http://localhost:8080/books/search/${searchText}`;
+        const apiUrl = `search/${searchText}`;
         handleSearch(apiUrl);
       };
-
 
     const handleSearchGenre = (genre) => {
         setGenre(genre.toLowerCase());
-        const apiUrl = `http://localhost:8080/books/genre/${genre}`;
+        const apiUrl = `genre/${genre}`;
         handleSearch(apiUrl);
       };
 
-    
     return (
         <>
         <nav className='etiquetas'>

@@ -1,22 +1,26 @@
+
 import Header from './Header';
 import Footer from './Footer';
-import { Link } from 'react-router-dom';
 import  '../assets/CSS/singleProduct.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
+import useRequest from '../hooks/useRequest';
+import { useBooksContext } from '../context/BooksContext';
 
 function SingleProduct(){
 
     const { id } = useParams();
-    const [book, setBook] = useState(null);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+    const { get } = useRequest();
+    const {book, setBook} = useBooksContext();
 
     const handleSearch = async () => {
         try {
-          const response = await axios.get(`http://localhost:8080/books/${id}`);
-          console.log(response);
-          setBook(response.data);
+          const data = await get(`${id}`);
+          console.log(data);
+          setBook(data);
           setError('');
         } catch (err) {
           console.log(err.message);
@@ -38,9 +42,8 @@ function SingleProduct(){
     return(
         <>
             <Header />
-            <main>
-                
-                <div key={book.bookid} >
+            <main className='singleProductMain'>
+                <div key={book.bookid} className='singleBookCard'>
                     <h1>{book.title}</h1>
                     <h2><span>Autor: </span>{book.author}</h2>
                     <img src={book.image} alt={book.title} />
@@ -49,6 +52,7 @@ function SingleProduct(){
                     <p><span>Genero: </span>{book.genre}</p> 
                     <p>{book.summary}</p> 
                     <p><span>Stock: </span>{book.stock}</p> 
+                    <p><span>Precio: </span>{book.price} €</p> 
                 </div>
             </main>
             <Footer />

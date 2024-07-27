@@ -31,6 +31,12 @@ header {
     
 }
 
+.logHome{
+    border: 7px solid var(--mostaza);
+    color: var(--green-white);
+   font-weight: 100;
+}
+
 .log button:last-child:hover {
     background-color: var(--green-white);
     border: 7px solid var(--mostaza);
@@ -76,6 +82,7 @@ header {
 
 .etiquetas {
     margin: 0px 40px;
+    cursor: pointer;
 }
 .etiquetas ul {
     display: flex;
@@ -134,7 +141,7 @@ header {
 
 .search button:hover {
     background-color: var(--morado);
-    color: var(--green-white)
+    color: var(--green-white);
 }
 
 .search button:active {

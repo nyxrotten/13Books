@@ -1,10 +1,10 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 
-const PropertyContext = createContext();
+const BooksContext = createContext();
 
-export const PropertyProvider = ({ children }) => {
-  //const [properties, setProperties] = useState([]);
+export const BooksProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [book, setBook] = useState([]);
 
   // compruebo si estoy logado en el localstorage y si es así relleno el setUser
   useEffect(() => {
@@ -15,15 +15,12 @@ export const PropertyProvider = ({ children }) => {
   }, []);
 
   return (
-    <PropertyContext.Provider value={{ user, setUser }}>
-      
+    <BooksContext.Provider value={{book, setBook, user, setUser }}>
       {children}
-    </PropertyContext.Provider>
+    </BooksContext.Provider>
   );
 };
 
-export const usePropertyContext = () => {
-    return useContext(PropertyContext);
+export const useBooksContext = () => {
+    return useContext(BooksContext);
 }
-
-/*<PropertyContext.Provider value={{ properties, setProperties, user, setUser }}> */
