@@ -25,9 +25,10 @@ const useRequest = () => {
     }
   };
 
-  const post = async (url, data) => {
+  const post = async (data) => {
     try {
-      const response = await axios.post(`${urlBase}/${url}`, data, config);
+      console.log(`estoy en post ${urlBase}`);
+      const response = await axios.post(`${urlBase}`, data, config);
       return response.data;
     } catch (error) {
       if (error.response && error.response.status === 401) {

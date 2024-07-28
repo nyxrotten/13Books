@@ -7,6 +7,7 @@ import { useBooksContext } from '../../context/BooksContext';
 import useRequest from '../../hooks/useRequest';
 import { useForm } from 'react-hook-form';
 
+import { useNavigate } from 'react-router-dom';
 
 function EditPage() {
    
@@ -28,6 +29,15 @@ function EditPage() {
         { value: '', label: 'Selecciona idioma' } 
     ];
 
+    const fechaFormateada = (date) => {
+        if (!date) return '';
+        if (typeof date === 'string') return date.split('T')[0];
+        const d = new Date(date);
+        const month = ('0' + (d.getMonth() + 1)).slice(-2);
+        const day = ('0' + d.getDate()).slice(-2);
+        return `${d.getFullYear()}-${month}-${day}`;
+      };
+
     const {
         register,
         handleSubmit,
@@ -41,6 +51,8 @@ function EditPage() {
     const [book, setBook] = useState({});
     const { post, put } = useRequest();
     const {books} = useBooksContext();
+    const navigate = useNavigate();
+    const [isFirstTime, setIsFirstTime] = useState(true);
     
 
     const doCreateUpdate = async (data) => {
@@ -51,13 +63,22 @@ function EditPage() {
             console.log(book);
             if (book) {
                 const response = await put(`${book.bookid}`, data);
-                alert('El libro se ha creado correctamente!');
+                console.log(response.book);
+                setBook(response.book);
+                alert('El libro se ha actualizado correctamente!');
             } else {
-                const response = await post(`${book.bookid}`, data);
-                alert('El libro se ha modificado correctamente!'); 
+                const response = await post(data);
+                console.log('desp del create');
+                console.log(response.book);
+                setBook(response.book);
+                alert('El libro se ha creado correctamente!'); 
             }
-            setBook(data);
+           
+            
             setError('');
+            console.log('desp de actualizar ');
+            console.log(book);
+            //navigate('/');
         } catch (error) {
             console.log(error.message);
             setError('No se han podido actualizar los datos del libro. Inténtalo más tarde.');
@@ -66,31 +87,33 @@ function EditPage() {
 
     useEffect(() => {
         console.log('en edit page');
-        console.log(books);
-        if (books) {
+        
+        if (books && id && isFirstTime) {
+        //if (books && id) {
+            console.log('estoy en if ' + id);
             const myBook = books.filter((book) => book.bookid === parseInt(id))[0];
-            console.log(myBook);
-            if (myBook) {
-              setBook(myBook);
-              setValue('title', book.title || '');
-              setValue('author', book.author || '');
-              setValue('isbn', book.isbn || '');
-              setValue('editorial', book.editorial || '');
-              setValue('language', book.languaje || '');
-              setValue('publication_date',  book.publication_date ? book.publication_date.split('T')[0] : '');
-              setValue('price', book.price || 0);
-              setValue('genreid', book.genreid || '1');
-              setValue('stock', book.stock || '1');
-              setValue('image', book.image || '');
-              setValue('summary', book.summary || '');
-            }
-            else {
-                reset();
-            }
+            setBook(myBook);
+            setIsFirstTime(false);
+        }  
+
+        if (book) {
+            console.log(book);
+            setValue('title', book.title || '');
+            setValue('author', book.author || '');
+            setValue('isbn', book.isbn || '');
+            setValue('editorial', book.editorial || '');
+            setValue('language', book.language || '');
+            setValue('publication_date',  fechaFormateada(book.publication_date));
+            setValue('price', book.price || 0);
+            setValue('genreid', book.genreid || '1');
+            setValue('stock', book.stock || '1');
+            setValue('image', book.image || '');
+            setValue('summary', book.summary || '');
         }
         else {
-          reset();
+            reset();
         }
+        
       }, [book, setValue, reset]);
 
     return (
@@ -99,6 +122,7 @@ function EditPage() {
         <div className="editBox">
         <div className="errorMessage">{error && <p>{error}</p>}</div>
             <form onSubmit={handleSubmit(doCreateUpdate)}>
+                <input type="hidden" {...register('bookid')} />
                 <div>
                     <label>Título</label>
                     <input type ="text" {...register("title", { required: true })} />
@@ -133,7 +157,8 @@ function EditPage() {
                 </div>
                 <div>
                     <label>Precio en €</label>
-                    <input type ="number"  step="0.01" {...register("price")} min='0'/>
+                    <input type ="number"  step="0.01" {...register("price", { required: true })} min='1'/>
+                    {errors.price && <p className='errorInput'>El precio es obligatorio</p>}
                 </div>
                 <div>
                     <label>Género</label>
@@ -152,7 +177,8 @@ function EditPage() {
                 </div>
                 <div>
                     <label>Unidades</label>
-                    <input type ="number" {...register("stock")} />
+                    <input type ="number" {...register("stock", { required: true })} min='1' />
+                    {errors.stock && <p className='errorInput'>El stock es 1 como mínimo</p>}
                 </div>
                 <div>
                     <label>Reumen</label>
@@ -172,3 +198,4 @@ function EditPage() {
 }
 
 export default EditPage;
+
