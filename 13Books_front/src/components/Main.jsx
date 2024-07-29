@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/CSS/nav.css';
 import { useBooksContext } from '../context/BooksContext';
@@ -8,6 +8,18 @@ function Main() {
     const [error, setError] = useState('');
     const { user } = useBooksContext();
     const {books, setBooks} = useBooksContext();
+    const [isFirstTime, setIsFirstTime] = useState(true);
+
+    useEffect(() => {
+      
+      if (!isFirstTime && books && books.length <= 0) {
+        setError('Lo sentimos, no hay libros que coincidan con esa búsqueda!');
+      }
+      else {
+        setError('');
+        setIsFirstTime(false);
+      }
+    }, [books]);
   
     return (
         <>

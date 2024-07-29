@@ -4,13 +4,16 @@ import '../assets/CSS/home.css';
 import logo from '../assets/imgs/13Books-logo.png';
 import { useBooksContext } from '../context/BooksContext';
 import HeaderAdmin from './HeaderAdmin';
+import { useNavigate } from 'react-router-dom';
 
 
 function Header() {
     const { user } = useBooksContext();
+    const navigate = useNavigate();
 
     function refresh() {
-        window.location.reload();
+        //window.location.reload();
+        navigate('/');
     }
     return(
         <>
@@ -18,12 +21,10 @@ function Header() {
                 <img src={logo} onClick={ refresh }/>
                 <div className='log'>
                 {user && user.username ? (
-
                         (user && user.role === 'admin') ? (
-                                <>
-                                    <HeaderAdmin/>
-                                  
-                                </>
+                            <>
+                                <HeaderAdmin/>
+                            </>
                         ):
                         ( 
                             <>

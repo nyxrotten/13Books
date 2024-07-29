@@ -9,16 +9,15 @@ function Nav () {
     const [genre, setGenre] = useState('');
     const [searchText, setSearchText] = useState('');
     const [error, setError] = useState('');
-    const { user } = useBooksContext();
+    const { user, searchCriteria, setSearchCriteria } = useBooksContext();
     const { get } = useRequest();
     const {books, setBooks} = useBooksContext();
 
     const handleSearch = async (urlApi) => {
-      console.log(urlApi);
+      
       try {
         const data = await get(urlApi);
         setBooks(data);
-        console.log(data);
         setError('');
       } catch (error) {
         console.log(error.message);
@@ -29,15 +28,28 @@ function Nav () {
       
     const handleSearchButton = () => {
         setSearchText(searchText.toLowerCase());
+        setSearchCriteria(searchText);
         const apiUrl = `search/${searchText}`;
         handleSearch(apiUrl);
       };
 
     const handleSearchGenre = (genre) => {
         setGenre(genre.toLowerCase());
+        setSearchCriteria(genre);
         const apiUrl = `genre/${genre}`;
         handleSearch(apiUrl);
       };
+
+
+      useEffect(() => {
+       
+        if (typeof searchCriteria === 'string' && searchCriteria !== '') {
+          const apiUrl = `search/${searchCriteria}`;
+          handleSearch(apiUrl);
+        }
+          
+    }, [searchCriteria]);
+
 
     return (
         <>

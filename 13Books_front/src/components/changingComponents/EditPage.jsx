@@ -49,7 +49,7 @@ function EditPage() {
     const { id } = useParams();
     const [error, setError] = useState('');
     const [book, setBook] = useState({});
-    const { post, put } = useRequest();
+    const { post, put, remove } = useRequest();
     const {books} = useBooksContext();
     const navigate = useNavigate();
     const [isFirstTime, setIsFirstTime] = useState(true);
@@ -60,17 +60,14 @@ function EditPage() {
         try {
             if (book && id) {
                 const response = await put(`${book.bookid}`, data);
-                console.log(response.book);
                 setBook(response.book);
                 alert('El libro se ha actualizado correctamente!');
             } else {
                 const response = await post(data);
-                console.log('desp del create');
-                console.log(response.book);
-                setBook(response.book);
+                 setBook(response.book);
                 alert('El libro se ha creado correctamente!'); 
             }
-            
+    
             setError('');
             navigate('/');
         } catch (error) {
@@ -80,29 +77,32 @@ function EditPage() {
     };
 
     const doDelete = async () => {
-        if (window.confirm('¿Estás seguro de que deseas eliminar este libro?')) {
-             try {
-                const response = await remove(`${book.bookid}`);
-                console.log(response);
-                alert('El libro se ha eliminado correctamente!');
-                navigate('/'); 
-            } catch (error) {
-                setError('No se ha podido eliminar el libro. Inténtalo más tarde.');
+        if (book.bookid > 0)
+        {
+            if (window.confirm('¿Estás seguro de que deseas eliminar este libro?')) {
+                try {
+                    const response = await remove(`${book.bookid}`);
+                    alert('El libro se ha eliminado correctamente!');
+                    navigate('/'); 
+                } catch (error) {
+                    console.log(error.message);
+                    setError('No se ha podido eliminar el libro. Inténtalo más tarde.');
+                }
             }
         }
     }
 
     useEffect(() => {
-        
+      
         if (books && id && isFirstTime) {
-        
             const myBook = books.filter((book) => book.bookid === parseInt(id))[0];
             setBook(myBook);
             setIsFirstTime(false);
         }  
 
         if (book) {
-            console.log(book);
+            
+           // console.log(book);
             setValue('title', book.title || '');
             setValue('author', book.author || '');
             setValue('isbn', book.isbn || '');
@@ -118,8 +118,13 @@ function EditPage() {
         else {
             reset();
         }
+
+          // Si no hay libros es que hemos recargado la página incorrectamente y redirigimos al home
+       /* if (books && books.length <= 0){
+             navigate('/');
+        }*/
         
-      }, [book, setValue, reset]);
+      }, [book]);
 
     return (
         <>
@@ -182,8 +187,8 @@ function EditPage() {
                     {errors.summary && <p className='errorInput'>El Resumen es obligatorio</p>}
                 
                 <div className='editBoxButtons'>
-                    <button onClick={() => navigate('/')}>Cancelar</button>
-                    <button onClick={doDelete}>Borrar libro</button>
+                    <button type="button" onClick={() => navigate('/')}>Cancelar</button>
+                    <button type="button" onClick={doDelete}>Borrar libro</button>
                     <button type="submit" className='enviarButton'>Guardar</button>
                 </div>
             </form>

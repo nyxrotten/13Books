@@ -6,10 +6,7 @@ import { useBooksContext } from '../context/BooksContext';
 
 function HeaderAdmin() {
     const { user } = useBooksContext();
-
-    function refresh() {
-        window.location.reload();
-    }
+  
     return(
         <>
             <div className='adminHead'>

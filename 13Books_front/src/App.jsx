@@ -14,23 +14,30 @@ import { BooksProvider } from './context/BooksContext';
 
 function App() {
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get('http://localhost:8080/books')
       .then(response => {
         setBooks(response.data);
+        setLoading(false);
       })
       .catch(error => {
         console.error('Error fetching data: ', error);
+        setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return <div className="loading">Cargando libros...</div>; // Indicador de carga
+  }
 
   return (
     <>
      <BooksProvider>  
       <Router>
         <Routes>
-          <Route path="/" element={<Home books={books}/>}/>
+          <Route path="/" element={<Home booksAll={books}/>}/>
           <Route path="/login" element={<LogIn />}/>
           <Route path="/register" element={<Register />}/>
           <Route path="/admin" element={<Admin books={books}/>}/>

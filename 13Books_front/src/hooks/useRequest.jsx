@@ -27,7 +27,7 @@ const useRequest = () => {
 
   const post = async (data) => {
     try {
-      console.log(`estoy en post ${urlBase}`);
+      
       const response = await axios.post(`${urlBase}`, data, config);
       return response.data;
     } catch (error) {
@@ -74,6 +74,7 @@ const useRequest = () => {
 
   const remove = async (url) => {
     try {
+      console.log(`estoy en delete ${urlBase}/${url}`);
       const response = await axios.delete(`${urlBase}/${url}`, config);
       return response.data;
     } catch (error) {
