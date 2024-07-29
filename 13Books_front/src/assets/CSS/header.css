@@ -1,0 +1,138 @@
+
+
+/* HEADER GENERAL*/
+
+header {
+    margin: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.log {
+    display: flex;
+}
+
+
+.log button {
+    width: 150px;
+    height: 50px;
+    font-family: 'Roboto Serif';
+    font-weight: 800;
+    color: var(--verde-oscuro);
+    margin-left: 10px;
+}
+
+.log button:first-child {
+    margin-right: 10px;
+    font-style: italic;
+    background-color: var(--green-white);
+    border: 7px solid var(--mostaza);
+}
+
+.log button:first-child:hover {
+    background-color: var(--mostaza);
+    font-style: normal;
+}
+
+.log button:last-child {
+    background-color: var(--mostaza);
+    border: none;
+    
+}
+
+.logHome{
+    border: 7px solid var(--mostaza);
+    color: var(--green-white);
+    font-weight: 100;
+}
+
+.log button:last-child:hover {
+    background-color: var(--green-white);
+    border: 7px solid var(--mostaza);
+    font-style: italic;
+}
+
+.log button:first-child:active,
+.log button:last-child:active {
+    background-color: var(--morado);
+    border: none;
+    color: var(--green-white)
+}
+
+.logued {
+    display: flex;
+    align-items: center;
+    color: var(--morado);
+}
+
+.logued .reactLink {
+    display: flex;
+    color: var(--verde);
+}
+
+.logued i {
+    font-size: 1.7em;
+    margin-right: 15px;
+}
+
+
+/*CARRITO*/
+
+.counterCarrito {
+    background-color: var(--coral);
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    color: var(--green-white);
+    position: relative;
+    left: 35px;
+    top: 10px;
+}
+
+/* HEADER LOG IN + REGISTER */
+
+
+.loginHeader i {
+    font-size: 2em;
+    color: var(--morado);
+}
+
+
+.logNav,
+.carritoNav {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    margin-left: 50px;
+    margin-bottom: 60px;
+}
+
+.logNav div,
+.carritoNav div {
+    background-color: var(--verde);
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logNav div:first-child,
+.carritoNav div:first-child {
+    width: 35px;
+    font-size: 1.2em;
+    color: var(--green-white)
+}
+
+.logNav div:first-child i,
+.carritoNav div:first-child i {
+    color: var(--green-white);
+}
+.logNav div:last-child,
+.carritoNav div:last-child {
+    font-style: italic;
+    width: 120px;
+}

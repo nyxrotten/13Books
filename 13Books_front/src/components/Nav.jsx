@@ -41,8 +41,8 @@ function Nav () {
 
     return (
         <>
-        <nav className='etiquetas'>
-                <ul>
+        <nav className='nav'>
+                <ul className='etiquetas'>
                     <li onClick={() => handleSearchGenre('No-Ficción')}>No-Ficción</li>
                     <li onClick={() => handleSearchGenre('Fantasía')}>Fantasía</li>
                     <li onClick={() => handleSearchGenre('Histórica')}>Histórica</li>
@@ -54,15 +54,15 @@ function Nav () {
                     <li onClick={() => handleSearchGenre('Ciencia Ficción')}>Ciencia Ficción</li>
                 </ul>
                 <div className='search'>
-                <input
-                    className='searchInput'
-                    placeholder=' Buscar por título, autor, género o isbn'
-                    type="text"
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}/>
-                <button onClick={handleSearchButton}>Buscar</button>
+                  <input
+                      className='searchInput'
+                      placeholder=' Buscar por título, autor, género o isbn'
+                      type="text"
+                      value={searchText}
+                      onChange={(e) => setSearchText(e.target.value)}/>
+                  <button onClick={handleSearchButton}>Buscar</button>
                 </div>
-            </nav>
+        </nav>
             <div className='searchErrorMessage'>
               {error && <p>{error}</p>}
             </div>
@@ -80,15 +80,19 @@ function Nav () {
                                       <p>{book.price} €</p>
                                       <button className="botonCarrito">Añadir al carrito</button>
                                     </>
-                                )
-                                :
-                                (user && user.role === 'admin') && (
-                                  <div>
-                                    <button><Link className='reactLink' to={`/editbook/${book.bookid}`}>Editar Libro</Link></button>
-                                  </div>
-                                )}
-                              </div>
-                              </Link>
+                                  )
+                                  :
+                                  (user && user.role === 'admin') && (
+                                    <div>
+                                      <button className='editButton'>
+                                        <Link className='reactLink' to={`/editbook/${book.bookid}`}>
+                                        Editar Libro <i className="fa-solid fa-pen-to-square"/>
+                                        </Link>
+                                      </button>
+                                    </div>
+                                  )}
+                                </div>
+                                </Link>
                           </div>
                       ))}
               </div>

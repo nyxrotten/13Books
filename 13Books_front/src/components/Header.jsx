@@ -1,4 +1,5 @@
 import  '../assets/CSS/home.css';
+import '../assets/CSS/header.css';
 import logo from '../assets/imgs/13Books-logo.png';
 import { useBooksContext } from '../context/BooksContext';
 import { Link } from 'react-router-dom';

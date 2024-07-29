@@ -1,49 +1,56 @@
 .editBox {
-    display: flex;
-    flex-direction: column;
-    width: 55%;
-    
-    row-gap: 10px;
-}
-
-.editBox div {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
     align-items: center;
 }
 
-.editBox label {
-    margin-right: 10px;
+.editBox form {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    margin-bottom: 50px;
+}
+
+.editBox label,
+.editBox select {
     font-style: italic;
     font-weight: 500;
+    font-family: 'Roboto Serif';
 }
 
 .editBox input {
-    width: 85%;
+    
     height: 25px;
     border: 4px solid var(--verde);
-    background-color: var(--grren-white);
+    background-color: var(--green-white);
     padding-left: 10px;
     font-family: 'Roboto Serif';
 }
 
+.errorInput {
+    color: var(--coral);
+    font-weight: 500;
+}
 .editBoxButtons {
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     column-gap: 15px;
 }
 .editBoxButtons button {
-    border: 4px solid var(--morado);
+    border: 4px solid var(--verde);
     height: 35px;
     width: 20%;
     font-family: 'Roboto Serif';
     font-weight: 600;
+    margin: 15px 0px;
 }
 
 .editBoxButtons button:first-child:hover {
-    background-color: var(--verde);
-    border: 4px solid var(--verde);
+    background-color: var(--coral);
+    border: 4px solid var(--coral);
 }
 
 .editBoxButtons button:nth-child(2):hover {
@@ -52,6 +59,20 @@
 }
 
 .editBoxButtons button:last-child:hover {
+    background-color: var(--verde);
+    border: 4px solid var(--verde);
+}
+
+form input:last-child {
+    height: 35px;
+    font-weight: 500;
+    font-size: 1.2em;
+    background-color: var(--verde);
+    border: 4px solid var(--verde);
+    color: var(--green-white);
+}
+
+form input:last-child:hover{
     background-color: var(--morado);
     border: 4px solid var(--morado);
 }

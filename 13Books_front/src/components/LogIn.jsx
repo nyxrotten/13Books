@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import '../assets/CSS/header.css';
 import '../assets/CSS/loginRegister.css';
 import logo from '../assets/imgs/13Books-logo.png';
 import Footer from './Footer';

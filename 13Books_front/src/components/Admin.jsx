@@ -27,7 +27,7 @@ function Admin( {books} ) {
                                 <p>{book.stock}</p>
                                 <p>{book.price}</p>
                             </div>
-                            <button className='cardInfoEdit'> <Link className='reactLink' to={('/login')}><FontAwesomeIcon icon="fa-solid fa-pen-to-square" /></Link></button>
+                            {/* <button className='cardInfoEdit'> <Link className='reactLink' to={('/login')}><FontAwesomeIcon icon="fa-solid fa-pen-to-square" /></Link></button> */}
                         </div>
                     ))}
 

@@ -18,7 +18,6 @@ function SingleProduct(){
     const handleSearch = async () => {
         try {
           const data = await get(`${id}`);
-         
           setBook(data);
           setError('');
         } catch (error) {
@@ -43,15 +42,18 @@ function SingleProduct(){
             <Header />
             <main className='singleProductMain'>
                 <div key={book.bookid} className='singleBookCard'>
-                    <h1>{book.title}</h1>
-                    <h2><span>Autor: </span>{book.author}</h2>
+                  <div className='bookCardImg'>
                     <img src={book.image} alt={book.title} />
-                    <p><span>Editorial: </span>{book.editorial}</p> 
-                    <p><span>Año de publicación: </span>{anioPublicacion}</p> 
-                    <p><span>Genero: </span>{book.genre}</p> 
-                    <p>{book.summary}</p> 
+                  </div>
+                  <div className='singleBookCardInfo'>
+                    <h1>{book.title}</h1>
+                    <h3>{book.author}</h3>
+                    <p>{anioPublicacion}</p>
+                    <p>{book.summary}</p>
                     <p><span>Stock: </span>{book.stock}</p> 
-                    <p><span>Precio: </span>{book.price} €</p> 
+                    <h4>{book.price} €</h4>
+                    <p>{book.genre}</p>
+                  </div>
                 </div>
             </main>
             <Footer />
