@@ -23,7 +23,7 @@ const showBookById = async (req, res) => {
     const client = await pool.connect();
     try {
         const { bookId } = req.params;
-        const result = await client.query('SELECT * FROM books as bk JOIN  genres as gd ON bk.genreid = gd.genreid WHERE bookid = $1  order by bk.title', [bookId]);
+        const result = await client.query('SELECT * FROM books as bk JOIN  genres as gd ON bk.genreid = gd.genreid WHERE bookid = $1', [bookId]);
         if (result.rows.length === 0) {
             return res.status(404).json({ error: 'Libro no encontrado!' });
         }
@@ -71,7 +71,7 @@ const searchBooks = async (req, res) => {
                             OR LOWER(bk.title) LIKE $1
                             OR LOWER(bk.isbn) LIKE $1
                             OR LOWER(bk.author) LIKE $1
-                        `;
+                        order by bk.title `;
         const result = await client.query(query, [searchtext]);
         if (result.rows.length <= 0) {
             return res.status(404).send('No disponemos de libros que coincidan con esta búsqueda');
