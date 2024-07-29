@@ -37,6 +37,7 @@ function App() {
           <Route path="/logout" element={<Logout/>}/>
           <Route path="/books/:id" element={<SingleProduct />} />
           <Route path="/editbook/:id" element={<EditPage />} />
+          <Route path="/createbook" element={<EditPage />} />
           <Route path="/carrito" element={<Carrito books={books}/>}/>
           </Routes>
       </Router>

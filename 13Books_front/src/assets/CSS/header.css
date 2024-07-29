@@ -10,12 +10,14 @@ header {
 }
 
 
-.log {
+.log,
+.adminHead {
     display: flex;
 }
 
 
-.log button {
+.log button,
+.adminHead button {
     width: 150px;
     height: 50px;
     font-family: 'Roboto Serif';
@@ -31,7 +33,8 @@ header {
     border: 7px solid var(--mostaza);
 }
 
-.log button:first-child:hover {
+.log button:first-child:hover,
+.adminHead button:first-child:hover {
     background-color: var(--mostaza);
     font-style: normal;
 }
@@ -61,7 +64,8 @@ header {
     color: var(--green-white)
 }
 
-.logued {
+.logued,
+.adminHeader {
     display: flex;
     align-items: center;
     color: var(--morado);
@@ -94,7 +98,6 @@ header {
 }
 
 /* HEADER LOG IN + REGISTER */
-
 
 .loginHeader i {
     font-size: 2em;

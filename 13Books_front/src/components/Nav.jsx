@@ -63,7 +63,7 @@ function Nav () {
                   <button onClick={handleSearchButton}>Buscar</button>
                 </div>
         </nav>
-            <div className='searchErrorMessage'>
+           {/* <div className='searchErrorMessage'>
               {error && <p>{error}</p>}
             </div>
             <div className="searchResult">
@@ -96,7 +96,7 @@ function Nav () {
                           </div>
                       ))}
               </div>
-          </div>
+          </div>*/}
         </>
     )
 }

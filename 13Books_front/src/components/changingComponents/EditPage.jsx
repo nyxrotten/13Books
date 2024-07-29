@@ -56,12 +56,9 @@ function EditPage() {
     
 
     const doCreateUpdate = async (data) => {
-        alert('estoy en doCreateUpdate ');
-
-        console.log(data);
+       
         try {
-            console.log(book);
-            if (book) {
+            if (book && id) {
                 const response = await put(`${book.bookid}`, data);
                 console.log(response.book);
                 setBook(response.book);
@@ -73,24 +70,32 @@ function EditPage() {
                 setBook(response.book);
                 alert('El libro se ha creado correctamente!'); 
             }
-           
             
             setError('');
-            console.log('desp de actualizar ');
-            console.log(book);
-            //navigate('/');
+            navigate('/');
         } catch (error) {
             console.log(error.message);
             setError('No se han podido actualizar los datos del libro. Inténtalo más tarde.');
         }
     };
 
+    const doDelete = async () => {
+        if (window.confirm('¿Estás seguro de que deseas eliminar este libro?')) {
+             try {
+                const response = await remove(`${book.bookid}`);
+                console.log(response);
+                alert('El libro se ha eliminado correctamente!');
+                navigate('/'); 
+            } catch (error) {
+                setError('No se ha podido eliminar el libro. Inténtalo más tarde.');
+            }
+        }
+    }
+
     useEffect(() => {
-        console.log('en edit page');
         
         if (books && id && isFirstTime) {
-        //if (books && id) {
-            console.log('estoy en if ' + id);
+        
             const myBook = books.filter((book) => book.bookid === parseInt(id))[0];
             setBook(myBook);
             setIsFirstTime(false);
@@ -172,15 +177,15 @@ function EditPage() {
                     <input type ="number" {...register("stock", { required: true })} min='1' />
                     {errors.stock && <p className='errorInput'>El stock es 1 como mínimo</p>}
              
-                    <label>Reumen</label>
+                    <label>Resumen</label>
                     <input type ="textarea" {...register("summary", { required: true })} />
                     {errors.summary && <p className='errorInput'>El Resumen es obligatorio</p>}
                 
                 <div className='editBoxButtons'>
-                    <button>Cancelar</button>
-                    <button>Borrar</button>
+                    <button onClick={() => navigate('/')}>Cancelar</button>
+                    <button onClick={doDelete}>Borrar libro</button>
+                    <button type="submit" className='enviarButton'>Guardar</button>
                 </div>
-                <input type="submit" className='enviarButton' />
             </form>
         </div>
         <Footer />

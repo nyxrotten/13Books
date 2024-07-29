@@ -1,10 +1,10 @@
 
 .homeMain {
     width: 100%;
-    margin-top: 50px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .homeMain h1 {
@@ -102,4 +102,27 @@
 .botonCarrito:hover {
     background-color: var(--coral);
     color: var(--green-white);
+}
+
+/*DESTACADOS HOME*/
+
+.bookCardDestacados {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    max-height: 450px;
+    margin-top: 20px;
+    /* transition: background 0.5s, color 0.5s; */
+}
+
+.bookCardDestacados img {
+    max-height: 250px;
+}
+
+.bookCardDestacados:hover {
+    background-color: var(--verde);
 }
