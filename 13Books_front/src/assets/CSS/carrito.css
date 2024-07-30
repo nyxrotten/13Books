@@ -73,3 +73,25 @@
     margin-left: 5px;
     font-size: 1.2em;
 }
+
+.carritoFirstBox {
+    width: 75%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.todosPedidos {
+    padding: 10px;
+    font-family: 'Roboto Serif';
+    background-color: var(--morado);
+    border: none;
+    color: var(--green-white);
+    border: 4px solid var(--morado);
+    font-size: 1em;
+
+}
+
+.todosPedidos:hover {
+    background-color: var(--green-white);
+    color: var(--morado);
+}

@@ -101,10 +101,12 @@ nav {
     color: var(--coral);
     font-weight: 600;
     font-size: 1.2em;
-    margin-top: 30px;
+    margin-top: 80px;
+    padding-top: 10px;
     height: 50px;
     width: 100%;
     text-align: center;
+    
 }
 
 .editButton {

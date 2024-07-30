@@ -31,7 +31,7 @@ function Home( {booksAll} ) {
             <Header/>
             <Nav/>
             <Main/>
-            <div className='destacados'>
+            {/* <div className='destacados'>
                 <div className='destacadosHomeTitulares'>
                     <h1>Destacados</h1>
                     <h3>Descubre el top 3 ventas del mes</h3>
@@ -49,7 +49,7 @@ function Home( {booksAll} ) {
                         </Link>
                     ))}
                 </div>
-            </div>
+            </div> */}
             <Footer />
         </>
     )

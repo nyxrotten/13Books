@@ -10,6 +10,7 @@ import Admin from './components/Admin';
 import SingleProduct from './components/SingleProduct';
 import EditPage from './components/changingComponents/EditPage';
 import Carrito from './components/changingComponents/Carrito';
+import Pedidos from './components/changingComponents/Pedidos';
 import { BooksProvider } from './context/BooksContext';
 import { CartProvider } from './context/CartContext';
 
@@ -33,7 +34,7 @@ function App() {
     return  <div className="loading">
               <h1>Cargando...</h1>
               <i className="fa-solid fa-spinner"></i>
-            </div>; // Indicador de carga
+            </div>;
   }
 
   return (
@@ -51,6 +52,7 @@ function App() {
           <Route path="/editbook/:id" element={<EditPage />} />
           <Route path="/createbook" element={<EditPage />} />
           <Route path="/carrito" element={<Carrito books={books}/>}/>
+          <Route path="/pedidos" element={<Pedidos />}></Route>
           </Routes>
       </Router>
       </CartProvider>

@@ -16,7 +16,7 @@ const showBooks = async (req, res) => {
     } finally {
       client.release();
     }
-} 
+}
 
 
 const showBookById = async (req, res) => {
