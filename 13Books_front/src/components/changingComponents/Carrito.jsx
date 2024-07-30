@@ -12,7 +12,15 @@ function Carrito(){
             <div><p>Carrito</p></div>
         </nav>
         <main className='carritoMain'>
+                
             <div className='carritoBox'>
+               
+                <div className='carritoFirstBox'>
+                    <Link to='/pedidos' className='reactLink'>
+                        <button className='todosPedidos'>Ver todos mis pedidos</button>
+                    </Link>
+                </div>
+                
                 <div className='envioBox'>
                     <i className="fa-solid fa-truck"></i>
                     <div>
@@ -26,6 +34,8 @@ function Carrito(){
                     </div> 
             </div>
         </main>
+      
+                  
         
         </>
     )

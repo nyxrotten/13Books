@@ -10,7 +10,9 @@ import Admin from './components/Admin';
 import SingleProduct from './components/SingleProduct';
 import EditPage from './components/changingComponents/EditPage';
 import Carrito from './components/changingComponents/Carrito';
+import Pedidos from './components/changingComponents/Pedidos';
 import { BooksProvider } from './context/BooksContext';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -29,12 +31,16 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div className="loading">Cargando libros...</div>; // Indicador de carga
+    return  <div className="loading">
+              <h1>Cargando...</h1>
+              <i className="fa-solid fa-spinner"></i>
+            </div>;
   }
 
   return (
     <>
-     <BooksProvider>  
+      <BooksProvider>
+      <CartProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Home booksAll={books}/>}/>
@@ -46,8 +52,10 @@ function App() {
           <Route path="/editbook/:id" element={<EditPage />} />
           <Route path="/createbook" element={<EditPage />} />
           <Route path="/carrito" element={<Carrito books={books}/>}/>
+          <Route path="/pedidos" element={<Pedidos />}></Route>
           </Routes>
       </Router>
+      </CartProvider>
     </BooksProvider>
     </>
   );
