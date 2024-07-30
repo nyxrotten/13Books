@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/CSS/nav.css';
+import '../assets/CSS/main.css';
 import { useBooksContext } from '../context/BooksContext';
 
 function Main() {
@@ -23,11 +24,15 @@ function Main() {
   
     return (
         <>
-            {(user && user.role === 'admin') && (<button className='editButton'>
+            {(user && user.role === 'admin') && (<div className='createBook'>
                 <Link className='reactLink' to={`/createbook`}>
-                 Crear Libro <i className="fa-solid fa-pen-to-square"/>
+                  <button className='createBookButton'>
+                    Crear nuevo <i className="fa-solid fa-circle-plus"/>
+                  </button>
                 </Link>
-            </button>)}
+                </div>)}
+            
+            
             <div className='searchErrorMessage'>
               {error && <p>{error}</p>}
             </div>
