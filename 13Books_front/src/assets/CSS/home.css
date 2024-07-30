@@ -13,29 +13,6 @@
     font-weight: 600 ;
 }
 
-.destacadosHomeTitulares h3 {
-    font-weight: 300;
-    border: 2px solid var(--mostaza);
-    padding: 5px 10px;
-}
-
-.destacadosHomeTitulares {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.destacadosHomeLibros {
-    margin-top: 25px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    column-gap: 20px;
-    row-gap: 20px;
-}
 
 .bookCard {
     width: 25%;
@@ -51,7 +28,8 @@
 }
 
 
-.bookCard img {
+.bookCard img,
+.boxDestacados img {
     max-height: 250px;
 }
 
@@ -106,23 +84,60 @@
 
 /*DESTACADOS HOME*/
 
-.bookCardDestacados {
-    width: 25%;
+.destacados {
+    margin-top: -60px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.destacados h1 {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 3em;
+    color: var(--morado);
+}
+
+.destacados h3 {
+    color: var(--green-white);
+    background-color: var(--morado);
+    padding: 10px 60px;
+    font-weight: 300;
+}
+.destacadosHomeTitulares {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    justify-content: center;
-    padding: 10px;
-    max-height: 450px;
-    margin-top: 20px;
-    /* transition: background 0.5s, color 0.5s; */
+    margin-top: -30px;
+    
 }
 
-.bookCardDestacados img {
-    max-height: 250px;
+.boxDestacados {
+    margin-top: 40px;
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    border: 4px solid var(--verde);
+    padding: 30px 20px;
+    margin-bottom: 60px;
 }
 
-.bookCardDestacados:hover {
+.bookDestacado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.bookDestacado img {
+    max-width: 250px;
+}
+
+
+
+.reactLink .bookDestacado:hover {
     background-color: var(--verde);
 }
