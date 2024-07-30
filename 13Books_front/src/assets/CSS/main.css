@@ -1,0 +1,28 @@
+.createBook {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: -60px;
+}
+
+.createBookButton {
+    width: 200px;
+    height: 50px;
+    background-color: var(--morado);
+    border: none;
+    font-family: 'Roboto Serif';
+    color: var(--green-white);
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.createBookButton:hover {
+    background-color: var(--green-white);
+    border: 4px solid var(--coral);
+    color: var(--coral);
+}

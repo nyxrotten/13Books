@@ -66,8 +66,29 @@ const logoutUser = (req, res) => {
     res.status(200).json({ message: 'Logout successful' });
 };
 
+
+const showUsers = async (req, res) => {
+    const client = await pool.connect();
+  
+  
+    try {
+      const result = await  client.query('SELECT * FROM books');
+      if (result.rows.length <= 0) {
+        return res.status(404).send('No disponemos de libros en estos momentos!');
+      }
+      res.status(200).json(result.rows);
+  
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    } finally {
+      client.release();
+    }
+}
+
+
 module.exports = {
   register,
   loginUser,
   logoutUser,
+  showUsers,
 };

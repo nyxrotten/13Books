@@ -1,0 +1,28 @@
+.loading {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--green-white);
+    background-color: var(--verde);
+}
+
+.loading h1 {
+    font-weight: 300;
+    font-style: italic;
+}
+
+.loading i {
+    margin-top: 20px;
+    font-size: 3em;
+    animation-name: loading;
+    animation-duration: 3s;
+}
+
+@keyframes loading {
+    0%   {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
+
