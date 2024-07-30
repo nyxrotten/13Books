@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import '../assets/CSS/header.css';
 import '../assets/CSS/home.css';
 import logo from '../assets/imgs/13Books-logo.png';
 import { useBooksContext } from '../context/BooksContext';
 import HeaderAdmin from './HeaderAdmin';
 import { useNavigate } from 'react-router-dom';
-
+import { useCartContext } from '../context/CartContext';
 
 function Header() {
     const { user } = useBooksContext();
     const navigate = useNavigate();
+    const {totalBooks} = useCartContext();
 
     function refresh() {
         navigate('/');
@@ -30,7 +32,7 @@ function Header() {
                             <div className='logued'>
                                 <h3>Bienvenid@, {user.username}</h3>
                                 <Link to={'/carrito'} className='reactLink'>
-                                    <div className='counterCarrito'><p>0</p></div>
+                                    <div className='counterCarrito'><p>{totalBooks}</p></div>
                                     <i className="fa-solid fa-cart-shopping" />
                                 </Link>
                             </div>

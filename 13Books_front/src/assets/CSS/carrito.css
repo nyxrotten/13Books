@@ -11,13 +11,24 @@
     row-gap: 20px;
 }
 
+.carritoLista {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    row-gap: 20px;
+}
+
 .envioBox, 
-.botonesCarrito {
+.botonesCarrito,
+.carritoLista {
     
     width: 75%;
 }
 
-.envioBox {
+.envioBox,
+.carritoLista {
     border: 4px solid var(--verde);
     display: flex;
 }
@@ -28,10 +39,47 @@
     color: var(--verde);
 }
 
+.carritoLista i {
+    font-size: 2em;
+    padding: 5px;
+    color: var(--coral);
+}
+
+.carritoLista div {
+    padding: 10px 0px 0px 30px;
+    font-style: italic;
+    color: var(--morado)
+}
+
+.carritoLista div p:nth-child(3) {
+    font-weight: 800;
+}
+.carritoItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   
+}
+
+.carritoItem img {
+    width: 5em;
+    height: auto;
+}
+
+.carritoItem button {
+    background: none;
+    border: none;
+    color:  var(--morado);
+    font-size: 0.6em;
+}
+
+.carritoItem button:hover {
+    cursor: pointer;
+}
+
 .envioBox div {
     padding: 30px 0px 0px 80px;
     font-style: italic;
-    color: var(--morado)
+    color: var(--morado);
 }
 
 .envioBox div p:nth-child(2) {
@@ -56,11 +104,11 @@
 .pagarCarrito {
     text-align: center;
     padding: 5px 0px;
-    width: 30%;
+    width: 45%;
 }
 
 .pagarCarrito {
-    width: 30.6%;
+    width: 45.6%;
     background-color: var(--coral);
     border: 4px solid var(--coral);
     color: var(--green-white);

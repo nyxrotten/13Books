@@ -40,23 +40,23 @@ function App() {
   return (
     <>
       <BooksProvider>
-      <CartProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home booksAll={books}/>}/>
-          <Route path="/login" element={<LogIn />}/>
-          <Route path="/register" element={<Register />}/>
-          <Route path="/admin" element={<Admin books={books}/>}/>
-          <Route path="/logout" element={<Logout/>}/>
-          <Route path="/books/:id" element={<SingleProduct />} />
-          <Route path="/editbook/:id" element={<EditPage />} />
-          <Route path="/createbook" element={<EditPage />} />
-          <Route path="/carrito" element={<Carrito books={books}/>}/>
-          <Route path="/pedidos" element={<Pedidos />}></Route>
-          </Routes>
-      </Router>
-      </CartProvider>
-    </BooksProvider>
+        <CartProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Home booksAll={books}/>}/>
+              <Route path="/login" element={<LogIn />}/>
+              <Route path="/register" element={<Register />}/>
+              <Route path="/admin" element={<Admin books={books}/>}/>
+              <Route path="/logout" element={<Logout/>}/>
+              <Route path="/books/:id" element={<SingleProduct />} />
+              <Route path="/editbook/:id" element={<EditPage />} />
+              <Route path="/createbook" element={<EditPage />} />
+              <Route path="/carrito" element={<Carrito books={books}/>}/>
+              <Route path="/pedidos" element={<Pedidos />}></Route>
+              </Routes>
+          </Router>
+        </CartProvider>
+      </BooksProvider>
     </>
   );
 }
