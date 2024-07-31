@@ -8,7 +8,7 @@ const showOrders = async (req, res) => {
       const result = await  client.query(`SELECT o.orderid, o.clientid, o.status, 
                                                 to_char(o.order_date, 'DD/MM/YYYY') as  order_date,
                                                 to_char(o.delivery_date, 'DD/MM/YYYY') as delivery_date, o.total_price, 
-                                                cli.name, cli.role
+                                                cli.name, cli.role, count(bk.bookid) as quantity
                                             FROM orders o
                                             JOIN clients cli ON cli.clientid = o.clientid
                                             JOIN orders_details od ON od.orderid = o.orderid
@@ -68,7 +68,7 @@ const showOrdersByClientId = async (req, res) => {
         const result = await client.query(`SELECT o.orderid, o.clientid, o.status, 
                                                 to_char(o.order_date, 'DD/MM/YYYY') as  order_date,
                                                 to_char(o.delivery_date, 'DD/MM/YYYY') as delivery_date, o.total_price, 
-                                                cli.name, cli.role
+                                                cli.name, cli.role, count(bk.bookid) as quantity
                                             FROM orders o
                                             JOIN clients cli ON cli.clientid = o.clientid
                                             JOIN orders_details od ON od.orderid = o.orderid
