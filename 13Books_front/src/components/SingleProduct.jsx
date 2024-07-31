@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/useRequest';
+import { useBooksContext } from '../context/BooksContext';
 import { useCartContext } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ function SingleProduct(){
     const { get } = useRequest();
     const [book, setBook] = useState({});
     const { addToShoppingCart } = useCartContext();
+    const { user } = useBooksContext();
 
     const handleSearch = async () => {
         try {
@@ -56,9 +58,21 @@ function SingleProduct(){
                     <p><span>Stock: </span>{book.stock}</p> 
                     <h4>{book.price} €</h4>
                     <p>{book.genre}</p>
-                    <Link to="" className="reactLink" onClick={(e) => {addToShoppingCart(book);}}>
-                    <i class="fa-solid fa-cart-shopping" />
-                    </Link>
+                    {(user && user.role === 'user') ? (                      
+                        <Link to="" className="reactLink" onClick={(e) => {addToShoppingCart(book);}}>
+                          <i className="fa-solid fa-cart-shopping"/>
+                        </Link>
+                    )
+                    :
+                    (user && user.role === 'admin') && (
+                      <div>
+                        <button className='editButton'>
+                          <Link className='reactLink' to={`/editbook/${book.bookid}`}>
+                          Editar Libro <i className="fa-solid fa-pen-to-square"/>
+                          </Link>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
             </main>

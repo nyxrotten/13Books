@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Header from '../Header.jsx';
 import '../../assets/CSS/carrito.css';
 import { Link } from 'react-router-dom';
@@ -10,9 +10,9 @@ import useRequest from '../../hooks/useRequest';
 function Carrito(){
 
     const [error, setError] = useState('');
-    const { shoppingCart, removeFromShoppingCart } = useCartContext();
+    const { shoppingCart, setShoppingCart, removeFromShoppingCart } = useCartContext();
     const { user } = useBooksContext();
-    const { get, post, remove } = useRequest();
+    const { post } = useRequest();
     const navigate = useNavigate();
 
     const realizarPago = async () => {
@@ -20,32 +20,27 @@ function Carrito(){
             const myOrder = shoppingCart.map(book => ({
                 bookid: book.bookid,
                 amount: book.amount,
-                price: book.price,
+                price: (book.price * book.amount).toFixed(2),
             }))
 
-            const data = JSON.stringify({
+            const data = {
                 userId: user.clientid, 
+                total: totalAPagar,
                 order: myOrder
-            });
+            };
 
             console.log(data);
-            const response = await post(data, 'cart');
+            const response = await post(data, 'orders');
         
             alert('El pedido se ha creado correctamente!'); 
+            setShoppingCart([]);
             setError('');
             navigate('/');
         } catch (error) {
             console.log(error.message);
             setError('No se ha podido crear el pedido. Inténtalo más tarde.');
         }
-    };
-    
-
-    useEffect(() => {
-        console.log('estoy en carrito: ');
-        console.log(shoppingCart);
-    }, []);
-
+    };    
 
     const totalProductos = shoppingCart.reduce((total, book) => total + book.amount, 0);
     const totalAPagar = shoppingCart.reduce((total, book) => total + ((book.price * book.amount) + 2.99), 0).toFixed(2);
@@ -58,8 +53,8 @@ function Carrito(){
             <div><p>Carrito</p></div>
         </nav>
         <div className='searchErrorMessage'>
-                {error && <p>{error}</p>}
-            </div>
+            {error && <p>{error}</p>}
+        </div>
         <main className='carritoMain'>
                 
             <div className='carritoBox'>

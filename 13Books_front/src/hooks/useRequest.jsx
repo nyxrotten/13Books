@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useBooksContext } from '../context/BooksContext';
+import { useCartContext } from '../context/CartContext';
 
 const useRequest = () => {
   const { setUser } = useBooksContext();
+  const { setShoppingCart } = useCartContext();
   const navigate = useNavigate();
   
   let urlBase = 'http://localhost:8080/books';
@@ -16,10 +18,9 @@ const useRequest = () => {
       config =  { headers: { 'x-access-token': token } };      
   }
 
-  const get = async (url, opc) => {
+  const get = async (url) => {
     try {
-      if (opc && opc === 'cart') urlBase = urlBaseOrder;
-      console.log('entro por get useRequest: ' + urlBase);
+      console.log( `entro por get useRequest: ${urlBase}/${url}`);
 
       const response = await axios.get(`${urlBase}/${url}`);
       //console.log(response.data);
@@ -29,11 +30,28 @@ const useRequest = () => {
     }
   };
 
+  const getAuth = async (url) => {
+    try {
+      console.log(`entro por getAuth useRequest:  ${urlBaseOrder}/${url}`);
+
+      const response = await axios.get(`${urlBaseOrder}/${url}`, config);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        alert('La sesión ha caducado! Debe iniciar sesión de nuevo.');
+        localStorage.removeItem('login');
+        setUser({});
+        setShoppingCart([]);
+        navigate('/');
+      }
+      throw new Error(`Error en el GET: ${error.message}`);
+    }
+  };
+
   const post = async (data, opc) => {
     try {
-      if (opc && opc === 'cart') urlBase = urlBaseOrder;
-      console.log('entro por post useRequest: ' + urlBase);
-      console.log(data);
+      if (opc && opc === 'orders') urlBase = urlBaseOrder;
       const response = await axios.post(`${urlBase}`, data, config);
       return response.data;
     } catch (error) {
@@ -41,6 +59,7 @@ const useRequest = () => {
         alert('La sesión ha caducado! Debe iniciar sesión de nuevo.');
         localStorage.removeItem('login');
         setUser({});
+        setShoppingCart([]);
         navigate('/');
       }
       throw new Error(`Error en el POST: ${error.message}`);
@@ -57,6 +76,7 @@ const useRequest = () => {
         alert('La sesión ha caducado! Debe iniciar sesión de nuevo.');
         localStorage.removeItem('login');
         setUser({});
+        setShoppingCart([]);
         navigate('/');
       }
       throw new Error(`Error en el PUT: ${error.message}`);
@@ -72,6 +92,7 @@ const useRequest = () => {
         alert('La sesión ha caducado! Debe iniciar sesión de nuevo.');
         localStorage.removeItem('login');
         setUser({});
+        setShoppingCart([]);
         navigate('/');
       }
       throw new Error(`Error en el PATCH: ${error.message}`);
@@ -81,7 +102,7 @@ const useRequest = () => {
   const remove = async (url, opc) => {
     try {
 
-      if (opc && opc === 'cart') urlBase = urlBaseOrder;
+      if (opc && opc === 'orders') urlBase = urlBaseOrder;
 
       console.log(`estoy en delete ${urlBase}/${url}`);
       const response = await axios.delete(`${urlBase}/${url}`, config);
@@ -91,13 +112,14 @@ const useRequest = () => {
         alert('La sesión ha caducado! Debe iniciar sesión de nuevo.');
         localStorage.removeItem('login');
         setUser({});
+        setShoppingCart([]);
         navigate('/');
       }
       throw new Error(`Error en el DELETE: ${error.message}`);
     }
   };
 
-  return { get, post, put, patch, remove };
+  return { get, post, put, patch, remove, getAuth};
 };
 
 export default useRequest;

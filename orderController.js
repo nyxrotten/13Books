@@ -6,17 +6,16 @@ const showOrders = async (req, res) => {
   
     try {
       const result = await  client.query(`SELECT o.orderid, o.clientid, o.status, 
-                                                to_char(o.order_date, 'DD/MM/YYYY') as  order_date,
-                                                to_char(o.delivery_date, 'DD/MM/YYYY') as delivery_date, o.total_price, 
-                                                cli.name, cli.role
-                                            FROM orders o
-                                            JOIN clients cli ON cli.clientid = o.clientid
-                                            JOIN orders_details od ON od.orderid = o.orderid
-                                            JOIN books bk ON od.bookid = bk.bookid
-                                            JOIN genres gd ON bk.genreid = gd.genreid 
-                                            GROUP BY o.orderid, o.clientid, o.status, o.order_date, o.delivery_date, 
-                                                    o.total_price, cli.name, cli.role
-                                            ORDER BY o.orderid`);
+                                            to_char(o.order_date, 'DD/MM/YYYY') as  order_date,
+                                            to_char(o.delivery_date, 'DD/MM/YYYY') as delivery_date, o.total_price, 
+                                            cli.name, cli.role, od.bookid,
+                                            od.quantity, od.price, bk.title, bk.image, gd.genre
+                                    FROM orders as o
+                                    JOIN clients as cli ON cli.clientid = o.clientid
+                                    JOIN orders_details as od ON od.orderid = o.orderid
+                                    JOIN books as bk ON od.bookid = bk.bookid
+                                    JOIN genres as gd ON bk.genreid = gd.genreid 
+                                    order by o.orderid, bk.title`);
       if (result.rows.length <= 0) {
         return res.status(404).send('No disponemos de pedidos en estos momentos!');
       }
@@ -68,16 +67,15 @@ const showOrdersByClientId = async (req, res) => {
         const result = await client.query(`SELECT o.orderid, o.clientid, o.status, 
                                                 to_char(o.order_date, 'DD/MM/YYYY') as  order_date,
                                                 to_char(o.delivery_date, 'DD/MM/YYYY') as delivery_date, o.total_price, 
-                                                cli.name, cli.role
-                                            FROM orders o
-                                            JOIN clients cli ON cli.clientid = o.clientid
-                                            JOIN orders_details od ON od.orderid = o.orderid
-                                            JOIN books bk ON od.bookid = bk.bookid
-                                            JOIN genres gd ON bk.genreid = gd.genreid 
-                                             WHERE o.clientid = $1
-                                            GROUP BY o.orderid, o.clientid, o.status, o.order_date, o.delivery_date, 
-                                                    o.total_price, cli.name, cli.role
-                                            ORDER BY o.orderid`, [clientId]);
+                                                cli.name, cli.role, od.bookid,
+                                                od.quantity, od.price, bk.title, bk.image, gd.genre
+                                            FROM orders as o
+                                            JOIN clients as cli ON cli.clientid = o.clientid
+                                            JOIN orders_details as od ON od.orderid = o.orderid
+                                            JOIN books as bk ON od.bookid = bk.bookid
+                                            JOIN genres as gd ON bk.genreid = gd.genreid 
+                                            WHERE o.clientid = $1
+                                            order by o.orderid, bk.title`, [clientId]);
 
                                           
         if (result.rows.length === 0) {

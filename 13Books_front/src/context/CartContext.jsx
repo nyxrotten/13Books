@@ -34,7 +34,7 @@ export const CartProvider = ({ children }) => {
     const totalBooks = shoppingCart.reduce((acc, book) => acc + book.amount, 0);
 
     return (
-        <CartContext.Provider value={{shoppingCart, addToShoppingCart, removeFromShoppingCart, totalBooks }}>
+        <CartContext.Provider value={{shoppingCart, addToShoppingCart, removeFromShoppingCart, totalBooks, setShoppingCart }}>
             {children}
         </CartContext.Provider>
     );

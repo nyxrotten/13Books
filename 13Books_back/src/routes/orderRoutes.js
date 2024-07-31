@@ -14,7 +14,7 @@ const {
 
 router.get('/orders/:orderId', authToken, showOrderById);
 
-router.get('/orders/client/:clinteId', authToken, showOrdersByClientId);
+router.get('/orders/client/:clientId', authToken, showOrdersByClientId);
 
 router.get('/orders', authToken, showOrders);
 
