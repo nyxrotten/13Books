@@ -39,16 +39,16 @@ function Carrito(){
             setError('No se ha podido crear el pedido. Inténtalo más tarde.');
         }
     };
-     
+    
 
     useEffect(() => {
         console.log('estoy en carrito: ');
         console.log(shoppingCart);
-      }, []);
+    }, []);
 
 
     const totalProductos = shoppingCart.reduce((total, book) => total + book.amount, 0);
-    const totalAPagar = shoppingCart.reduce((total, book) => total + (book.price * book.amount), 0).toFixed(2);
+    const totalAPagar = shoppingCart.reduce((total, book) => total + ((book.price * book.amount) + 2.99), 0).toFixed(2);
 
     return(
         <>
@@ -58,12 +58,12 @@ function Carrito(){
             <div><p>Carrito</p></div>
         </nav>
         <div className='searchErrorMessage'>
-              {error && <p>{error}</p>}
+                {error && <p>{error}</p>}
             </div>
         <main className='carritoMain'>
                 
             <div className='carritoBox'>
-               
+
                 <div className='carritoFirstBox'>
                     <Link to='/pedidos' className='reactLink'>
                         <button className='todosPedidos'>Ver todos mis pedidos</button>
@@ -71,24 +71,21 @@ function Carrito(){
                 </div>
                 <div className='carritoLista'>
                     {shoppingCart.length === 0 ? (
-                        <div>
+                        <div className='carritoVacio'>
                             <p>El carrito está vacío</p>
                         </div>
                     ) : (
                         shoppingCart.map(book => (
                             <div key={book.bookid} className="carritoItem">
-                                <div>
-                                 <img src={book.image} alt={book.title} />
-                                </div>
-                                <div className="carritoItnfo">
+                                <img src={book.image} alt={book.title} />
+                                <div className="carritoInfo">
                                     <p>{book.title}</p>
                                     <p>{book.author}</p>
                                     <p>{(book.amount === 1 ? book.price :((book.price * book.amount).toFixed(2)))} €</p>
                                     <p>{book.amount} {(book.amount === 1 ? 'unidad' : 'unidades')}</p>
-                                </div>
-                                <div>
                                     <button onClick={() => removeFromShoppingCart(book.bookid)}><i className="fa-solid fa-trash"></i></button>
                                 </div>
+                                
                             </div>
                         ))
                     )}
@@ -102,7 +99,7 @@ function Carrito(){
                     </div>
                 </div>
                     <div className='botonesCarrito'>
-                        <div className='totalCarrito'>{totalProductos} {totalProductos === 1 ? 'producto' : 'productos'} - {totalAPagar} €</div>
+                        <div className='totalCarrito'>{totalProductos} {totalProductos === 1 ? 'producto + envío' : 'productos + envío'} - {totalAPagar} €</div>
                         <button className='pagarCarrito' onClick={realizarPago}>PAGAR <i className="fa-solid fa-credit-card" /></button>
                     </div> 
             </div>

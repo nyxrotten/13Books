@@ -27,30 +27,38 @@ function Pedidos(){
                     <p>Libros: </p>
                     <p>Total: </p>
                     <p>Estado: </p>
+                    <button className='checkPedido'>
+                    <i className="fa-solid fa-circle-xmark"/>
+                    </button>
+                    
                 </div>
                 <div className="pedido">
                     <p>Fecha: </p>
                     <p>Libros: </p>
                     <p>Total: </p>
                     <p>Estado: </p>
+                    <i className="fa-solid fa-circle-check" />
                 </div>
                 <div className="pedido">
                     <p>Fecha: </p>
                     <p>Libros: </p>
                     <p>Total: </p>
                     <p>Estado: </p>
+                    <i className="fa-solid fa-circle-check" />
                 </div>
                 <div className="pedido">
                     <p>Fecha: </p>
                     <p>Libros: </p>
                     <p>Total: </p>
                     <p>Estado: </p>
+                    <i className="fa-solid fa-circle-check" />
                 </div>
                 <div className="pedido">
                     <p>Fecha: </p>
                     <p>Libros: </p>
                     <p>Total: </p>
                     <p>Estado: </p>
+                    <i className="fa-solid fa-circle-check" />
                 </div>
                 
             </div>

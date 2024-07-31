@@ -26,3 +26,8 @@
     border: 4px solid var(--coral);
     color: var(--coral);
 }
+
+.botonCarrito .reactLink,
+.cotonCarrito .fa-cart-shopping {
+    color: var(--green-white);
+}

@@ -51,9 +51,9 @@ function Main() {
                                   <p>{book.price} €</p>
                                   <button className="botonCarrito">
                                     <Link to="" className="reactLink" onClick={(e) => {addToShoppingCart(book);}}>
-                                        Añadir al carrito <i class="fa-solid fa-cart-shopping"/>
+                                        Añadir al carrito <i className="fa-solid fa-cart-shopping"/>
                                     </Link>
-                                  </button>                 
+                                  </button>
                                 </>
                               )
                               :

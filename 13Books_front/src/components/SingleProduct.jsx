@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/useRequest';
+import { useCartContext } from '../context/CartContext';
+import { Link } from 'react-router-dom';
 
 function SingleProduct(){
 
@@ -14,6 +16,7 @@ function SingleProduct(){
     const navigate = useNavigate();
     const { get } = useRequest();
     const [book, setBook] = useState({});
+    const { addToShoppingCart } = useCartContext();
 
     const handleSearch = async () => {
         try {
@@ -53,6 +56,9 @@ function SingleProduct(){
                     <p><span>Stock: </span>{book.stock}</p> 
                     <h4>{book.price} €</h4>
                     <p>{book.genre}</p>
+                    <Link to="" className="reactLink" onClick={(e) => {addToShoppingCart(book);}}>
+                    <i class="fa-solid fa-cart-shopping" />
+                    </Link>
                   </div>
                 </div>
             </main>
