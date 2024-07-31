@@ -8,14 +8,12 @@ const showOrders = async (req, res) => {
       const result = await  client.query(`SELECT o.orderid, o.clientid, o.status, 
                                                 to_char(o.order_date, 'DD/MM/YYYY') as  order_date,
                                                 to_char(o.delivery_date, 'DD/MM/YYYY') as delivery_date, o.total_price, 
-                                                cli.name, cli.role, count(bk.bookid) as quantity
+                                                cli.name, cli.email, cli.role, count(od.bookid) as quantity
                                             FROM orders o
                                             JOIN clients cli ON cli.clientid = o.clientid
                                             JOIN orders_details od ON od.orderid = o.orderid
-                                            JOIN books bk ON od.bookid = bk.bookid
-                                            JOIN genres gd ON bk.genreid = gd.genreid 
                                             GROUP BY o.orderid, o.clientid, o.status, o.order_date, o.delivery_date, 
-                                                    o.total_price, cli.name, cli.role
+                                                    o.total_price, cli.name, cli.email, cli.role
                                             ORDER BY o.orderid`);
       if (result.rows.length <= 0) {
         return res.status(404).send('No disponemos de pedidos en estos momentos!');
@@ -37,7 +35,7 @@ const showOrderById = async (req, res) => {
         const result = await client.query(`SELECT o.orderid, o.clientid, o.status, 
                                             to_char(o.order_date, 'DD/MM/YYYY') as  order_date,
                                             to_char(o.delivery_date, 'DD/MM/YYYY') as delivery_date, o.total_price, 
-                                            cli.name, cli.role, od.bookid,
+                                            cli.name, cli.email, cli.role, od.bookid,
                                             od.quantity, od.price, bk.title, bk.image, gd.genre
                                         FROM orders as o
                                         JOIN clients as cli ON cli.clientid = o.clientid
@@ -68,15 +66,13 @@ const showOrdersByClientId = async (req, res) => {
         const result = await client.query(`SELECT o.orderid, o.clientid, o.status, 
                                                 to_char(o.order_date, 'DD/MM/YYYY') as  order_date,
                                                 to_char(o.delivery_date, 'DD/MM/YYYY') as delivery_date, o.total_price, 
-                                                cli.name, cli.role, count(bk.bookid) as quantity
+                                                cli.name, cli.email, cli.role, count(od.bookid) as quantity
                                             FROM orders o
                                             JOIN clients cli ON cli.clientid = o.clientid
                                             JOIN orders_details od ON od.orderid = o.orderid
-                                            JOIN books bk ON od.bookid = bk.bookid
-                                            JOIN genres gd ON bk.genreid = gd.genreid 
-                                             WHERE o.clientid = $1
+                                            WHERE o.clientid = $1
                                             GROUP BY o.orderid, o.clientid, o.status, o.order_date, o.delivery_date, 
-                                                    o.total_price, cli.name, cli.role
+                                                    o.total_price, cli.name, cli.email,  cli.role
                                             ORDER BY o.orderid`, [clientId]);
 
                                           
@@ -100,20 +96,17 @@ const createOrder = async (req, res) => {
     console.log('entro por createOrder');
     const client = await pool.connect();
     try {
-        console.log(req.body);
+        
       const { userId, total, order } = req.body;
 
+      if (!req.body || !userId || !order || order.length === 0) {
+        return res.status(400).send({
+            error: 'Los datos para crear el pedido son incorrectos. Intentalo de nuevo!'
+        });
+    }
+
+
       await client.query('BEGIN'); 
-      
-      console.log(userId);
-      console.log(order);
-      console.log(total);
-   
-        if (!req.body || !userId || !order || order.length === 0) {
-            return res.status(400).send({
-                error: 'Los datos para crear el pedido son incorrectos. Intentalo de nuevo!'
-            });
-        }
 
         // inserto los datos del pedido en orders
       const query = `INSERT INTO orders (clientid, status, order_date, delivery_date, total_price)
@@ -121,7 +114,7 @@ const createOrder = async (req, res) => {
       const values = [userId, total];
       const result = await client.query(query, values);
       const orderId = result.rows[0].orderid;
-      console.log(orderId);
+      
 
       // inserto los detalles del pedido en order_details y resto el stock de cada libro
       for (const book of order) {

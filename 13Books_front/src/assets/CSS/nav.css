@@ -101,7 +101,8 @@ nav {
     color: var(--coral);
     font-weight: 600;
     font-size: 1.2em;
-    margin-top: 80px;
+    margin-top: 50px;
+    padding-bottom: 50px;
     padding-top: 10px;
     height: 50px;
     width: 100%;

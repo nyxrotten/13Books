@@ -20,10 +20,7 @@ const useRequest = () => {
 
   const get = async (url) => {
     try {
-      console.log( `entro por get useRequest: ${urlBase}/${url}`);
-
       const response = await axios.get(`${urlBase}/${url}`);
-      //console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error(`Error en el GET: ${error.message}`);
