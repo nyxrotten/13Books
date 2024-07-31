@@ -63,7 +63,7 @@ function EditPage() {
                 setBook(response.book);
                 alert('El libro se ha actualizado correctamente!');
             } else {
-                const response = await post(data);
+                const response = await post(data, 'books');
                  setBook(response.book);
                 alert('El libro se ha creado correctamente!'); 
             }
@@ -143,7 +143,7 @@ function EditPage() {
                     <input type ="text" {...register("author")} />
                 
                     <label>ISBN</label>
-                    <input type ="text" {...register("isbn", { required: true })} />
+                    <input type ="text" {...register("isbn", { required: true })} max='20'/>
                     {errors.isbn && <p className='errorInput'>El ISBN es obligatorio</p>}
                
                     <label>Editorial</label>

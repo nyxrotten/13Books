@@ -6,7 +6,8 @@ const useRequest = () => {
   const { setUser } = useBooksContext();
   const navigate = useNavigate();
   
-  const urlBase = 'http://localhost:8080/books';
+  let urlBase = 'http://localhost:8080/books';
+  let urlBaseOrder = 'http://localhost:8080/orders';
 
   let config = {};
   const loginLocalStorage = JSON.parse(localStorage.getItem('login'));
@@ -15,8 +16,11 @@ const useRequest = () => {
       config =  { headers: { 'x-access-token': token } };      
   }
 
-  const get = async (url) => {
+  const get = async (url, opc) => {
     try {
+      if (opc && opc === 'cart') urlBase = urlBaseOrder;
+      console.log('entro por get useRequest: ' + urlBase);
+
       const response = await axios.get(`${urlBase}/${url}`);
       //console.log(response.data);
       return response.data;
@@ -25,9 +29,11 @@ const useRequest = () => {
     }
   };
 
-  const post = async (data) => {
+  const post = async (data, opc) => {
     try {
-      
+      if (opc && opc === 'cart') urlBase = urlBaseOrder;
+      console.log('entro por post useRequest: ' + urlBase);
+      console.log(data);
       const response = await axios.post(`${urlBase}`, data, config);
       return response.data;
     } catch (error) {
@@ -72,8 +78,11 @@ const useRequest = () => {
     }
   };
 
-  const remove = async (url) => {
+  const remove = async (url, opc) => {
     try {
+
+      if (opc && opc === 'cart') urlBase = urlBaseOrder;
+
       console.log(`estoy en delete ${urlBase}/${url}`);
       const response = await axios.delete(`${urlBase}/${url}`, config);
       return response.data;

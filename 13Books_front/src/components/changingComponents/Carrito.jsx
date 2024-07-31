@@ -1,12 +1,45 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../Header.jsx';
 import '../../assets/CSS/carrito.css';
 import { Link } from 'react-router-dom';
+import { useBooksContext } from '../../context/BooksContext';
 import { useCartContext } from '../../context/CartContext';
+import { useNavigate } from 'react-router-dom';
+import useRequest from '../../hooks/useRequest';
 
 function Carrito(){
 
+    const [error, setError] = useState('');
     const { shoppingCart, removeFromShoppingCart } = useCartContext();
+    const { user } = useBooksContext();
+    const { get, post, remove } = useRequest();
+    const navigate = useNavigate();
+
+    const realizarPago = async () => {
+        try {
+            const myOrder = shoppingCart.map(book => ({
+                bookid: book.bookid,
+                amount: book.amount,
+                price: book.price,
+            }))
+
+            const data = JSON.stringify({
+                userId: user.clientid, 
+                order: myOrder
+            });
+
+            console.log(data);
+            const response = await post(data, 'cart');
+        
+            alert('El pedido se ha creado correctamente!'); 
+            setError('');
+            navigate('/');
+        } catch (error) {
+            console.log(error.message);
+            setError('No se ha podido crear el pedido. Inténtalo más tarde.');
+        }
+    };
+     
 
     useEffect(() => {
         console.log('estoy en carrito: ');
@@ -24,6 +57,9 @@ function Carrito(){
             <div><Link className='reactLink' to={('/')}>< i className="fa-solid fa-house"/></Link></div>
             <div><p>Carrito</p></div>
         </nav>
+        <div className='searchErrorMessage'>
+              {error && <p>{error}</p>}
+            </div>
         <main className='carritoMain'>
                 
             <div className='carritoBox'>
@@ -67,7 +103,7 @@ function Carrito(){
                 </div>
                     <div className='botonesCarrito'>
                         <div className='totalCarrito'>{totalProductos} {totalProductos === 1 ? 'producto' : 'productos'} - {totalAPagar} €</div>
-                        <button className='pagarCarrito'>PAGAR <i className="fa-solid fa-credit-card" /></button>
+                        <button className='pagarCarrito' onClick={realizarPago}>PAGAR <i className="fa-solid fa-credit-card" /></button>
                     </div> 
             </div>
         </main>
