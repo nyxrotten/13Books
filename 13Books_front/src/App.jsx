@@ -11,6 +11,7 @@ import SingleProduct from './components/SingleProduct';
 import EditPage from './components/changingComponents/EditPage';
 import Carrito from './components/changingComponents/Carrito';
 import Pedidos from './components/changingComponents/Pedidos';
+import PedidoDetalle from './components/changingComponents/PedidoDetalle';
 import { BooksProvider } from './context/BooksContext';
 import { CartProvider } from './context/CartContext';
 
@@ -58,6 +59,7 @@ function App() {
               <Route path="/createbook" element={<EditPage />} />
               <Route path="/carrito" element={<Carrito books={books}/>}/>
               <Route path="/pedidos" element={<Pedidos />}></Route>
+              <Route path="/pedido/:orderid" element={<PedidoDetalle />}></Route>
               </Routes>
           </Router>
         </CartProvider>

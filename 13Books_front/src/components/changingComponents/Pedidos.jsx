@@ -11,7 +11,7 @@ function Pedidos(){
     
     const [error, setError] = useState('');
     const { user } = useBooksContext();
-    const { getAuth, remove } = useRequest();
+    const { getAuth, put, remove } = useRequest();
     const [orders, setOrders] = useState([]);
     const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ function Pedidos(){
         }  
       };
 
-      const borrarPedido = async (orderid) => {
+    const borrarPedido = async (orderid) => {
         if (orderid > 0)
         {
             if (window.confirm('¿Estás seguro de que deseas eliminar este pedido?')) {
@@ -47,6 +47,27 @@ function Pedidos(){
         }
     }
 
+    const modificarEstado = async (orderid) => {
+        if (orderid > 0)
+        {
+            if (window.confirm('¿Estás seguro de que deseas cambiar el estado a Entregado?')) {
+                try {
+                    const data = {
+                        status: 'ENTREGADO',
+                    };
+        
+                    console.log(data);
+                    const response = await put(`${orderid}`,data, 'orders');
+                    alert('El pedido se ha actualizado correctamente!');
+                    navigate('/pedidos'); 
+                } catch (error) {
+                    console.log(error.message);
+                    setError('No se ha podido modificar el pedido. Inténtalo más tarde.');
+                }
+            }
+        }
+    }
+
     useEffect(() => {
         console.log('use efect');
         console.log(user);
@@ -54,7 +75,7 @@ function Pedidos(){
         if (user && user.role === 'user') {
             apiUrl += `client/${user.clientid}`;
         }
-       
+    
         verPedidos(apiUrl);  
     }, []);
         
@@ -87,14 +108,26 @@ function Pedidos(){
                                 <p>Nombre de cliente: {order.name} </p>
                                 <p>Email de cliente: {order.email} </p>
                                 </>
-                             ) }
+                             )}
                             <p>Fecha: {order.order_date} </p>
                             <p>Libros: {order.quantity}</p>
                             <p>Total: {order.total_price} €</p>
                             <p>Estado: {order.status} </p>
-                            <p>Fecha entrega: {order.delivery_date} </p>                    
-                            <button className='checkPedido' onClick={() => borrarPedido(order.orderid)}>
-                                <i className="fa-solid fa-circle-xmark"></i>        
+                            <p>Fecha entrega: {order.delivery_date} </p>  
+                            {(user && user.role === 'admin') && (          
+                                <>        
+                                    <button className='checkPedido' onClick={() => borrarPedido(order.orderid)}>
+                                        <i className="fa-solid fa-circle-xmark"></i>        
+                                    </button>
+                                    {(order.status !== 'ENTREGADO' && 
+                                        <button className='changePedido' onClick={() => modificarEstado(order.orderid)}>
+                                            <i className="fa-solid fa-circle-check"></i>        
+                                        </button>
+                                    )}
+                                </>
+                            )}
+                            <button className='detallePedido' onClick={() => navigate(`/pedido/${order.orderid}`)}>
+                                Ver Detalle
                             </button>
                         </div>
                     ))

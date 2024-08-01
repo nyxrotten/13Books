@@ -10,8 +10,8 @@ const useRequest = () => {
   
   const urlBackenddev = "http://localhost:8080";
   const urlBackend = "https://one3books.onrender.com";
-  let urlBase = `${urlBackend}/books`;
-  let urlBaseOrder = `${urlBackend}/orders`;
+  let urlBase = `${urlBackenddev}/books`;
+  let urlBaseOrder = `${urlBackenddev}/orders`;
 
   let config = {};
   const loginLocalStorage = JSON.parse(localStorage.getItem('login'));
@@ -66,8 +66,9 @@ const useRequest = () => {
     }
   };
 
-  const put = async (url, data) => {
+  const put = async (url, data, opc) => {
     try {
+      if (opc && opc === 'orders') urlBase = urlBaseOrder;
       const response = await axios.put(`${urlBase}/${url}`, data, config);
       return response.data;
     } catch (error) {

@@ -7,6 +7,7 @@ const {
 	showOrders,
     showOrderById,
     createOrder,
+    updateOrder,
     deleteOrder,
     showOrdersByClientId,
 } = require('../controllers/orderController');
@@ -19,6 +20,8 @@ router.get('/orders/client/:clientId', authToken, showOrdersByClientId);
 router.get('/orders', authToken, showOrders);
 
 router.post('/orders', authToken, createOrder);
+
+router.put('/orders/:orderId', authToken, updateOrder);
 
 router.delete('/orders/:orderId', authToken, deleteOrder);
 

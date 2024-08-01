@@ -13,12 +13,6 @@ function Home( {booksAll} ) {
     const {books} = useBooksContext();
     const { user } = useBooksContext();
 
-    useEffect(() => {
-        console.log('estoy en home');
-      console.log(user);
-          
-    }, []);
-
     return(
         <>
             <Header/>
