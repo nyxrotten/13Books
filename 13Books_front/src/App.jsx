@@ -12,6 +12,7 @@ import EditPage from './components/changingComponents/EditPage';
 import Carrito from './components/changingComponents/Carrito';
 import Pedidos from './components/changingComponents/Pedidos';
 import PedidoDetalle from './components/changingComponents/PedidoDetalle';
+import Reservas from './components/changingComponents/Reservas';
 import { BooksProvider } from './context/BooksContext';
 import { CartProvider } from './context/CartContext';
 
@@ -22,7 +23,7 @@ function App() {
 
   const urlBackenddev = "http://localhost:8080";
   const urlBackend = "https://one3books.onrender.com";
-  let urlBase = `${urlBackend}/books`;
+  let urlBase = `${urlBackenddev}/books`;
 
   useEffect(() => {
     axios.get(urlBase)
@@ -60,6 +61,7 @@ function App() {
               <Route path="/carrito" element={<Carrito books={books}/>}/>
               <Route path="/pedidos" element={<Pedidos />}></Route>
               <Route path="/pedido/:orderid" element={<PedidoDetalle />}></Route>
+              <Route path="/reservas" element={<Reservas />}></Route>
               </Routes>
           </Router>
         </CartProvider>

@@ -39,7 +39,8 @@
 
 .detallePedido,
 .checkPedido,
-.changePedido {
+.changePedido,
+.checkReserva {
     font-family: 'Roboto Serif';
     border: none;
     background-color: var(--verde);
@@ -49,19 +50,26 @@
     margin-bottom: 10px;
 }
 
+.checkReserva {
+    padding: 10px;
+}
+
 .changePedido {
     background-color: var(--morado);
     color: var(--green-white);
+    
 }
 
 .detallePedido:hover,
-.checkPedido:hover {
+.checkPedido:hover,
+.checkReserva:hover {
     background-color: var(--morado);
     color: var(--green-white);
 }
 
 .checkPedido i,
-.changePedido i {
+.changePedido i,
+.checkReserva i {
     margin-left: 10px;
 }
 

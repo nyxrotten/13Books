@@ -11,8 +11,11 @@ function HeaderAdmin() {
             <div className='adminHead'>
                 <div className='adminHeader'>
                 <h3>Bienvenid@, admin {user.username}</h3>
-                <Link to={'/pedidos'} className='reactLink'>
+                <Link to={'/pedidos'} className='reactLink' alt="Pedidos">
                     <i className="fa-solid fa-truck" />
+                </Link>
+                <Link to={'/reservas'} className='reactLink' alt="Reservas">
+                    <i className="fa-solid fa-book"/>
                 </Link>
                 </div>
                 <div>

@@ -17,7 +17,7 @@ function PedidoDetalle() {
 
     const verPedidoDetalle = async () => {
         try {
-            const data = await getAuth(`${orderid}`);
+            const data = await getAuth(`${orderid}`,'orders');
             
             setOrder(data);
             setOrderData(data[0]);

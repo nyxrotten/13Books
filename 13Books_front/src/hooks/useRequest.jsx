@@ -10,8 +10,10 @@ const useRequest = () => {
   
   const urlBackenddev = "http://localhost:8080";
   const urlBackend = "https://one3books.onrender.com";
-  let urlBase = `${urlBackend}/books`;
-  let urlBaseOrder = `${urlBackend}/orders`;
+
+  let urlBase = `${urlBackenddev}/books`;
+  let urlBaseOrder = `${urlBackenddev}/orders`;
+  let urlBaseBooking = `${urlBackenddev}/bookings`;
 
   let config = {};
   const loginLocalStorage = JSON.parse(localStorage.getItem('login'));
@@ -29,11 +31,13 @@ const useRequest = () => {
     }
   };
 
-  const getAuth = async (url) => {
+  const getAuth = async (url, opc) => {
     try {
-      console.log(`entro por getAuth useRequest:  ${urlBaseOrder}/${url}`);
-
-      const response = await axios.get(`${urlBaseOrder}/${url}`, config);
+      console.log(`entro por getAuth useRequest:  /${url}`);
+      if (opc && opc === 'orders') urlBase = urlBaseOrder;
+      if (opc && opc === 'bookings') urlBase = urlBaseBooking;
+      
+      const response = await axios.get(`${urlBase}/${url}`, config);
       console.log(response.data);
       return response.data;
     } catch (error) {
@@ -50,7 +54,10 @@ const useRequest = () => {
 
   const post = async (data, opc) => {
     try {
+      console.log(opc);
       if (opc && opc === 'orders') urlBase = urlBaseOrder;
+      if (opc && opc === 'bookings') urlBase = urlBaseBooking;
+      console.log(urlBase);
       const response = await axios.post(`${urlBase}`, data, config);
       return response.data;
     } catch (error) {
@@ -103,6 +110,7 @@ const useRequest = () => {
     try {
 
       if (opc && opc === 'orders') urlBase = urlBaseOrder;
+      if (opc && opc === 'bookings') urlBase = urlBaseBooking;
 
       console.log(`estoy en delete ${urlBase}/${url}`);
       const response = await axios.delete(`${urlBase}/${url}`, config);

@@ -3,8 +3,8 @@
 Para este proyecto Inés y Laura han decidido embarcarse en crear su propia tienda de libros **13Books**. 
 La web cuenta en su página inicial con una sección de destacados _el top 3 de ventas_ y con un menú superior donde se permite consultar los libros filtrando por _título, autor o isbn_ o directamente por _género_. 
 En el detalle de cada libro podrás encontrar la portada y la información relevante como es el título, autor, año de publicación, stock disponible, sinopsis y precio. 
-También se muestra un acceso para poder hacer _login_ como cliente, o _registrarse_ si aun no lo eres, y de esta forma poder comprar (acceso al carrito) y visualizar tus pedidos.
-En el caso de ser _administrador_ de la web podrás realizar la gestión de los libros _creando, modificando y eliminando_ y la gestión de los pedidos _eliminando_ o cambiandolos de estado a _entregado_.
+También se muestra un acceso para poder hacer _login_ como cliente, o _registrarse_ si aun no lo eres, y de esta forma poder comprar (acceso al carrito), visualizar tus pedidos y en caso de no disponer de stock para un ejemplar puedes realizar una reserva.
+En el caso de ser _administrador_ de la web podrás realizar la gestión de los libros _creando, modificando y eliminando_, la gestión de los pedidos _eliminando_ o cambiandolos de estado a _entregado_ y la gestión de reservas pudiendo eliminarlas si el cliente los solicita.
 
 
 ## Instalación
@@ -256,6 +256,48 @@ Body JSON con los datos del libro a modificar
 | Parameter | Type       | Description                       |
 | :-------- | :-------   | :-------------------------------- |
 | `orderid`  | `integer`  | **Required**. Id del pedido      |
+
+
+### Métodos de reservas
+#### Obtener el listado de reservas por cliente
+
+```http
+  GET /bookings/:clientId
+```
+
+| Parameter   | Type       | Description                            |
+| :---------- | :--------- | :------------------------------------- |
+| `clientId`  | `int`      | **Required**.  Id del cliente          |
+
+#### Crear una reserva
+
+```http
+  POST /bookings
+```
+Body JSON con los datos del libro a crear
+{
+    userId: integer,
+    bookid: integer
+}
+
+
+
+### Métodos con usuario administrador registrado
+
+#### Obtener todas las reservas
+```http
+  GET /bookings/
+```
+
+#### Eliminar una reserva por Id
+
+```http
+  DELETE /bookings/:bookingid
+```
+
+| Parameter | Type       | Description                        |
+| :-------- | :-------   | :--------------------------------  |
+| `bookingid`  | `integer`  | **Required**. Id de la reserva  |
 
 
 ### Métodos de acceso de usuario

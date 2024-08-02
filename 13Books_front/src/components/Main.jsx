@@ -4,7 +4,7 @@ import '../assets/CSS/nav.css';
 import '../assets/CSS/main.css';
 import { useBooksContext } from '../context/BooksContext';
 import { useCartContext } from '../context/CartContext';
-
+import useRequest from '../hooks/useRequest';
 
 function Main() {
 
@@ -13,6 +13,27 @@ function Main() {
     const {books, setBooks} = useBooksContext();
     const [isFirstTime, setIsFirstTime] = useState(true);
     const { addToShoppingCart } = useCartContext();
+    const { post } = useRequest();
+
+
+    const insertBooking = async (book) => {
+      try {
+            if (book) {
+              const data = {
+                userId: user.clientid,
+                bookid: book.bookid
+              };
+
+            console.log(data);
+            const response = await post(data, 'bookings');
+            alert('La reserva se ha creado correctamente!'); 
+            setError('');
+          } 
+      } catch (error) {
+          console.log(error.message);
+          setError('No se han podido crear la reserva. Inténtalo más tarde.');
+      }
+  };
 
     useEffect(() => {
       
@@ -47,14 +68,27 @@ function Main() {
                               <h4>{book.title}</h4>
                               <h4>{book.author}</h4>
                               {(user && user.role === 'user') ? (
-                                <>
-                                  <p>{book.price} €</p>
-                                  <button className="botonCarrito">
-                                    <Link to="" className="reactLink" onClick={(e) => {addToShoppingCart(book);}}>
-                                        Añadir al carrito <i className="fa-solid fa-cart-shopping"/>
-                                    </Link>
-                                  </button>
-                                </>
+                                (book.stock <= 0) ? (
+                                  <>
+                                    <p>{book.price} €</p>
+                                    <button className="botonCarrito">
+                                      <Link to="" className="reactLink" onClick={(e) => {insertBooking(book);}}>
+                                          Reservar Libro <i className="fa-solid fa-bookmark"/>
+                                      </Link>
+                                    </button>
+                                  </>                    
+                                )
+                                :
+                                ( 
+                                  <>
+                                    <p>{book.price} €</p>
+                                    <button className="botonCarrito">
+                                      <Link to="" className="reactLink" onClick={(e) => {addToShoppingCart(book);}}>
+                                          Añadir al carrito <i className="fa-solid fa-cart-shopping"/>
+                                      </Link>
+                                    </button>
+                                  </>
+                                )
                               )
                               :
                               (user && user.role === 'admin') && (

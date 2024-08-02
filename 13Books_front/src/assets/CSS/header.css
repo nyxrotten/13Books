@@ -64,6 +64,7 @@ header {
     color: var(--green-white)
 }
 
+
 .logued,
 .adminHeader {
     display: flex;
@@ -75,12 +76,11 @@ header {
     display: flex;
     color: var(--verde);
 }
-
+.fa-book,
 .logued i {
     font-size: 1.7em;
     margin-right: 15px;
 }
-
 
 /*CARRITO*/
 
@@ -143,12 +143,14 @@ header {
 
 /* HEADER ADMIN */
 
-.fa-truck{
+.fa-truck,
+.fa-book{
     color: var(--verde);
     font-size: 2em;
     padding-left: 15px;
 }
 
-.fa-truck:hover {
+.fa-truck:hover,
+.fa-book:hover {
     color: var(--morado);
 }

@@ -15,7 +15,7 @@ function SingleProduct(){
     const { id } = useParams();
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const { get } = useRequest();
+    const { get, post } = useRequest();
     const [book, setBook] = useState({});
     const { addToShoppingCart } = useCartContext();
     const { user } = useBooksContext();
@@ -31,6 +31,26 @@ function SingleProduct(){
           setBook(null);
         }
       };
+
+      const insertBooking = async (book) => {
+        try {
+              if (book) {
+                const data = {
+                  userId: user.clientid,
+                  bookid: book.bookid
+                };
+  
+              console.log(data);
+              const response = await post(data, 'bookings');
+              alert('La reserva se ha creado correctamente!'); 
+              setError('');
+            } 
+        } catch (error) {
+            console.log(error.message);
+            setError('No se han podido crear la reserva. Inténtalo más tarde.');
+        }
+    };
+  
       
     useEffect(() => {
         handleSearch();
@@ -65,10 +85,25 @@ function SingleProduct(){
                     <p><span>Stock: </span>{book.stock}</p> 
                     <h4>{book.price} €</h4>
                     <p>{book.genre}</p>
-                    {(user && user.role === 'user') ? (                      
-                        <Link to="" className="reactLink" onClick={(e) => {addToShoppingCart(book);}}>
-                          <i className="fa-solid fa-cart-shopping"/>
-                        </Link>
+                    {(user && user.role === 'user') ?
+                    (
+                      (book.stock <= 0) ? (
+                        <>
+                          <button className="botonCarrito">
+                            <Link to="" className="reactLink" onClick={(e) => {insertBooking(book);}}>
+                                Reservar Libro <i className="fa-solid fa-bookmark"/>
+                            </Link>
+                          </button>
+                        </>                    
+                      )
+                      :
+                      ( 
+                        <>
+                          <Link to="" className="reactLink" onClick={(e) => {addToShoppingCart(book);}}>
+                            <i className="fa-solid fa-cart-shopping"/>
+                          </Link>
+                        </>
+                      )
                     )
                     :
                     (user && user.role === 'admin') && (

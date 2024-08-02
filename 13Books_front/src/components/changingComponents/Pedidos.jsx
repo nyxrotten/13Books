@@ -19,7 +19,7 @@ function Pedidos(){
     const verPedidos = async (urlApi) => {
         
         try {
-            const data = await getAuth(urlApi);
+            const data = await getAuth(urlApi,'orders');
             setOrders(data);
             setError('');
         } catch (error) {
@@ -83,7 +83,7 @@ function Pedidos(){
         <>
             <Header />
             <nav className='carritoNav'>
-            <div><Link className='reactLink' to={('/')}>< i className="fa-solid fa-truck"/></Link></div>
+            <div><Link className='reactLink' to={('/')}>< i className="fa-solid fa-home"/></Link></div>
                 {(user && user.role === 'admin') ? (
                     <div><p>Pedidos</p></div>
                 ) : (

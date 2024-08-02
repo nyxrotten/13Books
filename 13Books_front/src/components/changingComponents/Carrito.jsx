@@ -68,6 +68,9 @@ function Carrito(){
             <div className='carritoBox'>
 
                 <div className='carritoFirstBox'>
+                    <Link to='/reservas' className='reactLink'>
+                        <button className='todosPedidos'>Ver todas mis reservas</button>
+                    </Link>
                     <Link to='/pedidos' className='reactLink'>
                         <button className='todosPedidos'>Ver todos mis pedidos</button>
                     </Link>
