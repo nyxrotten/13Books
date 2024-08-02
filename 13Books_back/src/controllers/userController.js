@@ -20,7 +20,7 @@ const register = async (req, res) => {
         const result = await client.query(query, values);
 
         const user = result.rows[0];
-        const token = jwt.sign({ id: user.userid, email: user.email }, process.env.SECRET_KEY, { expiresIn: '30m' });
+        const token = jwt.sign({ id: user.userid, email: user.email }, process.env.SECRET_KEY, { expiresIn: '20m' });
         res.setHeader('x-auth-token', token);
         res.status(201).json({token, user });
     } catch (err) {
@@ -48,7 +48,7 @@ const loginUser = async (req, res) => {
         if (!validPassword) {
             return res.status(400).json({ error: 'Credenciales incorrectas' });
         }
-        const token = jwt.sign({ id: user.userid, email: user.email }, process.env.SECRET_KEY, { expiresIn: '30m' });
+        const token = jwt.sign({ id: user.userid, email: user.email }, process.env.SECRET_KEY, { expiresIn: '20m' });
         res.setHeader('x-auth-token', token);
         res.status(200).json({ token, user });
 

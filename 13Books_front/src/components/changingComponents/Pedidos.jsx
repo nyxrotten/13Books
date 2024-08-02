@@ -20,7 +20,6 @@ function Pedidos(){
         
         try {
             const data = await getAuth(urlApi);
-
             setOrders(data);
             setError('');
         } catch (error) {
@@ -59,7 +58,7 @@ function Pedidos(){
                     console.log(data);
                     const response = await put(`${orderid}`,data, 'orders');
                     alert('El pedido se ha actualizado correctamente!');
-                    navigate('/pedidos'); 
+                    location.reload();
                 } catch (error) {
                     console.log(error.message);
                     setError('No se ha podido modificar el pedido. Inténtalo más tarde.');

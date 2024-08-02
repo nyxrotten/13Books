@@ -17,25 +17,33 @@ function Carrito(){
 
     const realizarPago = async () => {
         try {
-            const myOrder = shoppingCart.map(book => ({
-                bookid: book.bookid,
-                amount: book.amount,
-                price: (book.price * book.amount).toFixed(2),
-            }))
 
-            const data = {
-                userId: user.clientid,
-                total: totalAPagar,
-                order: myOrder
-            };
+            if (shoppingCart && shoppingCart.length > 0) {
+                const myOrder = shoppingCart.map(book => ({
+                    bookid: book.bookid,
+                    amount: book.amount,
+                    price: (book.price * book.amount).toFixed(2),
+                }))
+    
+                const data = {
+                    userId: user.clientid,
+                    total: totalAPagar,
+                    order: myOrder
+                };
+    
+                console.log(data);
+                const response = await post(data, 'orders');
+            
+                alert('El pedido se ha creado correctamente!'); 
+                setShoppingCart([]);
+                setError('');
+                navigate('/');
 
-            console.log(data);
-            const response = await post(data, 'orders');
-        
-            alert('El pedido se ha creado correctamente!'); 
-            setShoppingCart([]);
-            setError('');
-            navigate('/');
+            }
+            else {
+                alert('El carrito está vacío!'); 
+            }
+           
         } catch (error) {
             console.log(error.message);
             setError('No se ha podido crear el pedido. Inténtalo más tarde.');
