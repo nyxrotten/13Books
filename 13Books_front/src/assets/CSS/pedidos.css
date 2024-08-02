@@ -24,17 +24,88 @@
     flex-direction: column;
 }
 
-.checkPedido {
-    align-self: flex-end;
-    position: relative;
-    bottom: 15px;
-    border: none;
-    color: var(--verde);
+.carritoNav .fa-truck {
+    font-size: 1.1em;
+    padding: 5px;
 }
 
-.checkPedido i {
-    font-size: 1.5em;
+.pedido p span {
+    font-weight: 700;
 }
+
+.detallePedido {
+    margin-top: 20px;
+}
+
+.detallePedido,
+.checkPedido,
+.changePedido {
+    font-family: 'Roboto Serif';
+    border: none;
+    background-color: var(--verde);
+    height: 30px;
+    font-weight: 500;
+    color: var(--morado);
+    margin-bottom: 10px;
+}
+
+.changePedido {
+    background-color: var(--morado);
+    color: var(--green-white);
+}
+
+.detallePedido:hover,
 .checkPedido:hover {
-    color: var(--morado)
+    background-color: var(--morado);
+    color: var(--green-white);
+}
+
+.checkPedido i,
+.changePedido i {
+    margin-left: 10px;
+}
+
+.changePedido:hover {
+    background-color: var(--coral);
+}
+
+.mainBoxDetallePedidos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.pedidoDetalleBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 4px solid var(--verde);
+    padding: 15px;
+    margin-bottom: 50px;
+}
+
+.detallesPedidoCliente {
+    margin-bottom: 20px;
+}
+
+h4 {
+    color: var(--morado);
+    padding-bottom: 15px;
+}
+
+.detallesPedidoLibrosBox {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+.detallesPedidoLibros {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    column-gap: 15px;
+}
+
+.detallesPedidoLibros img {
+    width: 100px;
 }

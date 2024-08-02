@@ -19,16 +19,16 @@ function Pedidos(){
     const verPedidos = async (urlApi) => {
         
         try {
-          const data = await getAuth(urlApi);
-   
-          setOrders(data);
-          setError('');
+            const data = await getAuth(urlApi);
+
+            setOrders(data);
+            setError('');
         } catch (error) {
-          console.log(error.message);
-          setError('No se han encontrado pedidos para este cliente.');
-          setOrders([]);
-        }  
-      };
+            console.log(error.message);
+            setError('No se han encontrado pedidos para este cliente.');
+            setOrders([]);
+        }
+    };
 
     const borrarPedido = async (orderid) => {
         if (orderid > 0)
@@ -71,7 +71,7 @@ function Pedidos(){
     useEffect(() => {
         console.log('use efect');
         console.log(user);
-        let apiUrl = '';      
+        let apiUrl = '';
         if (user && user.role === 'user') {
             apiUrl += `client/${user.clientid}`;
         }
@@ -84,7 +84,7 @@ function Pedidos(){
         <>
             <Header />
             <nav className='carritoNav'>
-            <div><Link className='reactLink' to={('/')}>< i className="fa-solid fa-shopping-cart"/></Link></div>
+            <div><Link className='reactLink' to={('/')}>< i className="fa-solid fa-truck"/></Link></div>
                 {(user && user.role === 'admin') ? (
                     <div><p>Pedidos</p></div>
                 ) : (
@@ -101,34 +101,35 @@ function Pedidos(){
                 ) : (
                     orders.map(order => (
 
-                        <div  key={order.orderid} className="pedido">
-                           {
+                        <div key={order.orderid} className="pedido">
+                            {
                             (user && user.role === 'admin') && (
                                 <>
-                                <p>Nombre de cliente: {order.name} </p>
-                                <p>Email de cliente: {order.email} </p>
-                                </>
-                             )}
-                            <p>Fecha: {order.order_date} </p>
-                            <p>Libros: {order.quantity}</p>
-                            <p>Total: {order.total_price} €</p>
-                            <p>Estado: {order.status} </p>
-                            <p>Fecha entrega: {order.delivery_date} </p>  
-                            {(user && user.role === 'admin') && (          
-                                <>        
-                                    <button className='checkPedido' onClick={() => borrarPedido(order.orderid)}>
-                                        <i className="fa-solid fa-circle-xmark"></i>        
-                                    </button>
-                                    {(order.status !== 'ENTREGADO' && 
-                                        <button className='changePedido' onClick={() => modificarEstado(order.orderid)}>
-                                            <i className="fa-solid fa-circle-check"></i>        
-                                        </button>
-                                    )}
+                                <p><span>Nombre de cliente: </span>{order.name} </p>
+                                <p><span>Email de cliente: </span>{order.email} </p>
                                 </>
                             )}
+                            <p><span>Fecha: </span> {order.order_date} </p>
+                            <p><span>Libros: </span>{order.quantity}</p>
+                            <p><span>Total: </span>{order.total_price} €</p>
+                            <p><span>Estado: </span>{order.status} </p>
+                            <p><span>Fecha entrega: </span>{order.delivery_date} </p>
+                            
                             <button className='detallePedido' onClick={() => navigate(`/pedido/${order.orderid}`)}>
                                 Ver Detalle
                             </button>
+                            {(user && user.role === 'admin') && (
+                                <>
+                                    {(order.status !== 'ENTREGADO' && 
+                                        <button className='changePedido' onClick={() => modificarEstado(order.orderid)}>
+                                            <p>Marcar como completado<i className="fa-solid fa-circle-check"></i></p>
+                                        </button>
+                                    )}
+                                    <button className='checkPedido' onClick={() => borrarPedido(order.orderid)}>
+                                        <p>Eliminar pedido<i className="fa-solid fa-circle-xmark"></i></p>
+                                    </button>
+                                </>
+                            )}
                         </div>
                     ))
                 )}

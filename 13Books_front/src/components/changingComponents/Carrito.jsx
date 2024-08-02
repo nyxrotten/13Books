@@ -24,7 +24,7 @@ function Carrito(){
             }))
 
             const data = {
-                userId: user.clientid, 
+                userId: user.clientid,
                 total: totalAPagar,
                 order: myOrder
             };
@@ -40,7 +40,7 @@ function Carrito(){
             console.log(error.message);
             setError('No se ha podido crear el pedido. Inténtalo más tarde.');
         }
-    };    
+    };
 
     const totalProductos = shoppingCart.reduce((total, book) => total + book.amount, 0);
     const totalAPagar = shoppingCart.reduce((total, book) => total + ((book.price * book.amount) + 2.99), 0).toFixed(2);

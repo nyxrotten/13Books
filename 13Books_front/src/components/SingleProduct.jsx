@@ -37,7 +37,10 @@ function SingleProduct(){
       }, [id]);
 
     if (!book) {
-        return <div>Cargando...</div>;
+        return <div className="loading">
+        <h1>Cargando...</h1>
+        <i className="fa-solid fa-spinner"></i>
+      </div>;
     }
 
     const anioPublicacion = (book.publication_date) ? new Date(book.publication_date).getFullYear() : '';

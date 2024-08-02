@@ -38,40 +38,39 @@ function PedidoDetalle() {
         <>
             <Header />
             <nav className='carritoNav'>
-                <div>
-                    <Link className='reactLink' to={('/pedidos')}>
-                        <i className="fa-solid fa-arrow-left" /> Volver a pedidos
-                    </Link>
-                </div>
+            <div><Link className='reactLink' to={('/pedidos')}>< i className="fa-solid fa-arrow-left"/></Link></div>
+                    <div><p>Pedidos</p></div>
             </nav>
-            <div className='mainBox'>
+            <div className='mainBoxDetallePedidos'>
                 <div className="pedidoDetalleBox">
                     {order ? (
-                        
-                       <>
-                       <p className='tituloPedido'>Datos del pedido</p>
+                        <>
+                        <div className='detallesPedidoCliente'>
+                        <h4>Datos del pedido</h4>
                         {(user && user.role === 'admin') && (
-                            <>
+                            <div>
                             <p>Nombre de cliente: {orderData.name} </p>
                             <p>Email de cliente: {orderData.email} </p>
-                            </>
-                         )}
+                            </div>
+                        )}
                         <p>Fecha: {orderData.order_date} </p>
                         <p>Total: {orderData.total_price} €</p>
                         <p>Estado: {orderData.status} </p>
                         <p>Fecha entrega: {orderData.delivery_date} </p>
-
+                        </div>
+                        <div className='detallesPedidoLibrosBox'>
                         {order.map((book) => (
-                            <div  key={book.bookid} className="pedido">
-                                <img src={book.image} alt={book.title} />
-                                <p>Título: {book.title}</p>
-                                <p>Price: {book.price}</p>
+                            <div  key={book.bookid} className="detallesPedidoLibros">
+                                <div><img src={book.image} alt={book.title} /></div>
+                                <div>
+                                <p>{book.title}</p>
                                 <p>Cantidad: {book.quantity}</p>
-                                <p>Género: {book.genre}</p>
+                                </div>
                             </div>
                             ))
                         }
-                       </>                       
+                        </div>
+                        </>
                     ) : (
                         <p>{error}</p>
                     )}
