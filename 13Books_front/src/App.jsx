@@ -23,7 +23,7 @@ function App() {
 
   const urlBackenddev = "http://localhost:8080";
   const urlBackend = "https://one3books.onrender.com";
-  let urlBase = `${urlBackenddev}/books`;
+  let urlBase = `${urlBackend}/books`;
 
   useEffect(() => {
     axios.get(urlBase)

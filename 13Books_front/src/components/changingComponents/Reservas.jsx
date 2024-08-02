@@ -19,10 +19,9 @@ function Reservas() {
 
             const data = await getAuth(apiUrl,'bookings');
             setBookings(data);
-            setError('');
         } catch (error) {
             console.log(error.message);
-            setError('No se ha encontrado reservas.');
+            setError('No hay reservas que mostrar en estos momentos');
         }
     };
 
@@ -51,6 +50,7 @@ function Reservas() {
         }
 
         verReservas(apiUrl);  
+       
     }, []);
 
     return (
@@ -62,14 +62,15 @@ function Reservas() {
             </nav>
             <div className='mainBoxDetallePedidos'>
                 <div className="pedidoDetalleBox">
-                    {bookings ? (
+                    
+                    {bookings && bookings.length > 0 ? (
                         <>
                         <div className='detallesPedidoCliente'>
                         <h4>Reservas</h4>
                         </div>
                         <div className='detallesPedidoLibrosBox'>
                         {bookings.map((booking) => (
-                            <div  key={booking.bookingid} className="detallesPedidoLibros">
+                            <div  key={booking.bookingid} className="detallesPedidoLibros revervaItem">
                                 <div><img src={booking.image} alt={booking.title} /></div>
                                 <div>
                                  {(user && user.role === 'admin') && (

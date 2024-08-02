@@ -4,7 +4,7 @@ const useRequestUsers = () => {
 
   const urlBackenddev = "http://localhost:8080";
   const urlBackend = "https://one3books.onrender.com";
-  const urlBase = `${urlBackenddev}/users`;
+  const urlBase = `${urlBackend}/users`;
 
   const register = async  (name, surname, city, username, email, password) => {
     try {
