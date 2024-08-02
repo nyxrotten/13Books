@@ -91,7 +91,7 @@ El proyecto está desplegado en Render. Estas son las urls de producción:
 Se lista a continuación los endpoints de los que disponemos para la tienda. 
 Las respuestas se obtendrán en formato json.
 
-### Métodos públicos
+### Métodos públicos LIBROS
 
 #### Obtener todos los libros
 
@@ -184,7 +184,7 @@ Body JSON con los datos del libro a modificar
 | :---------- | :--------- | :---------------------------- |
 | `genre`     | `sting`    | **Required**. género a buscar |
 
-### Métodos con usuario registrado
+### Métodos con usuario registrado DE PEDIDOS
 
 #### Obtener todos los pedidos
 
@@ -258,7 +258,7 @@ Body JSON con los datos del libro a modificar
 | `orderid`  | `integer`  | **Required**. Id del pedido      |
 
 
-### Métodos de reservas
+### Métodos de RESERVAS
 #### Obtener el listado de reservas por cliente
 
 ```http
