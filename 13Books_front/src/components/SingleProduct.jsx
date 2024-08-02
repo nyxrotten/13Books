@@ -48,6 +48,10 @@ function SingleProduct(){
     return(
         <>
             <Header />
+            <nav className='carritoNav'>
+            <div><Link className='reactLink' to={('/')}>< i className="fa-solid fa-house"/></Link></div>
+            <div><p>Libro</p></div>
+          </nav>
             <main className='singleProductMain'>
                 <div key={book.bookid} className='singleBookCard'>
                   <div className='bookCardImg'>
